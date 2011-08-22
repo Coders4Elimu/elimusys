@@ -1,0 +1,7 @@
+2011-08-17 15:02:49 Debug: Notice (8): Undefined variable: javascript in [C:\Dev\Workspace\elimusms\views\layouts\home.ctp, line 16]
+2011-08-17 15:03:24 Debug: Notice (8): Undefined variable: javascript in [C:\Dev\Workspace\elimusms\views\layouts\home.ctp, line 16]
+2011-08-18 20:05:44 Debug: Notice (8): Undefined property: School::$Schooladdress in [C:\Dev\Workspace\elimusms\controllers\schools_controller.php, line 26]
+2011-08-18 20:05:44 Debug: Notice (8): Trying to get property of non-object in [C:\Dev\Workspace\elimusms\controllers\schools_controller.php, line 26]
+2011-08-18 20:25:18 Debug: Notice (8): Undefined property: School::$Schoolsaddress in [C:\Dev\Workspace\elimusms\controllers\schools_controller.php, line 26]
+2011-08-18 20:26:38 Debug: Notice (8): Undefined property: Schoolsaddress::$Address in [C:\Dev\Workspace\elimusms\controllers\schools_controller.php, line 27]
+2011-08-18 20:52:53 Debug: Notice (8): Use of undefined constant saveOK - assumed 'saveOK' in [C:\Dev\Workspace\elimusms\controllers\schools_controller.php, line 41]
