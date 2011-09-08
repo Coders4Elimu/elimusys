@@ -1,14 +1,16 @@
+<?php 
+	$this->Html->addCrumb(__('View Students', true), '/students');
+?>
 <div class="students index">
 	<h2><?php __('Students');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('StudentID');?></th>
-			<th><?php echo $this->Paginator->sort('SchoolID');?></th>
-			<th><?php echo $this->Paginator->sort('FirstName');?></th>
-			<th><?php echo $this->Paginator->sort('LastName');?></th>
-			<th><?php echo $this->Paginator->sort('MiddleName');?></th>
+			<th><?php echo $this->Paginator->sort('School Name','SchoolID');?></th>
+			<th><?php echo $this->Paginator->sort('First Name','FirstName');?></th>
+			<th><?php echo $this->Paginator->sort('Middle Name','MiddleName');?></th>
+			<th><?php echo $this->Paginator->sort('Last Name','LastName');?></th>
 			<th><?php echo $this->Paginator->sort('Gender');?></th>
-			<th><?php echo $this->Paginator->sort('dob');?></th>
+			<th><?php echo $this->Paginator->sort('Date Of Birth', 'dob');?></th>
 			<th><?php echo $this->Paginator->sort('Details');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
@@ -21,11 +23,10 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $student['Student']['StudentID']; ?>&nbsp;</td>
-		<td><?php echo $student['Student']['SchoolID']; ?>&nbsp;</td>
+		<td><?php echo $schoolOptions[$student['Student']['SchoolID']]; ?>&nbsp;</td>
 		<td><?php echo $student['Student']['FirstName']; ?>&nbsp;</td>
-		<td><?php echo $student['Student']['LastName']; ?>&nbsp;</td>
 		<td><?php echo $student['Student']['MiddleName']; ?>&nbsp;</td>
+		<td><?php echo $student['Student']['LastName']; ?>&nbsp;</td>
 		<td><?php echo $student['Student']['Gender']; ?>&nbsp;</td>
 		<td><?php echo $student['Student']['dob']; ?>&nbsp;</td>
 		<td><?php echo $student['Student']['Details']; ?>&nbsp;</td>

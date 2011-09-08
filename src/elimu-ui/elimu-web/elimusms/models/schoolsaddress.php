@@ -13,7 +13,7 @@ class Schoolsaddress extends AppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'OwnerSchoolAddress' => array(
+		'OfficialSchoolAddress' => array(
 			'className' => 'Address',
 			'foreignKey' => 'AddressID',
 			'conditions' => '',

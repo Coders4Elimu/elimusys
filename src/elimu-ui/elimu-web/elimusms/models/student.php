@@ -7,15 +7,15 @@ class Student extends AppModel {
 		'FirstName' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
+				'message' => 'Please provide a first name',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 			'alphanumeric' => array(
-				'rule' => array('alphanumeric'),
-				//'message' => 'Your custom message here',
+				'rule' => array('custom', '/^[a-z0-9 ]*$/i') ,
+				'message' => 'Please provide a valid first name',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -25,7 +25,7 @@ class Student extends AppModel {
 		'LastName' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
+				'message' => 'Please provide a last name',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -33,7 +33,7 @@ class Student extends AppModel {
 			),
 			'alphanumeric' => array(
 				'rule' => array('alphanumeric'),
-				//'message' => 'Your custom message here',
+				'message' => 'Please provide a valid last name',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -43,7 +43,7 @@ class Student extends AppModel {
 		'Gender' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				//'message' => 'Your custom message here',
+				'message' => 'Please select a gender value',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -53,7 +53,7 @@ class Student extends AppModel {
 		'dob' => array(
 			'date' => array(
 				'rule' => array('date'),
-				//'message' => 'Your custom message here',
+				'message' => 'Please provide a valid birth date',
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
@@ -62,12 +62,21 @@ class Student extends AppModel {
 		),
 	);
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
-	var $hasMany = array(
-		'MyAddresses' => array(
+	var $belongsTo = array(
+		'StudentCurrentSchool' => array(
+			'className' => 'School',
+			'foreignKey' => 'SchoolID',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
+	
+	var $hasOne = array(
+		'MyStudentAddress' => array(
 			'className' => 'Studentsaddress',
 			'foreignKey' => 'StudentID',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -77,10 +86,14 @@ class Student extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'MyClasses' => array(
+	);
+	
+	var $hasMany = array(
+		
+		'MyStudentClasses' => array(
 			'className' => 'Studentsclass',
 			'foreignKey' => 'StudentID',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -90,7 +103,7 @@ class Student extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-		'MyParents' => array(
+		'MyStudentParents' => array(
 			'className' => 'Studentparent',
 			'foreignKey' => 'StudentID',
 			'unique' => true,

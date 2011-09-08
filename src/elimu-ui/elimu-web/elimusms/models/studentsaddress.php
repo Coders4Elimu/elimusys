@@ -5,14 +5,14 @@ class Studentsaddress extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
-		'OwnerStudentProfileInformation' => array(
+		'MyStudentProfileInformation' => array(
 			'className' => 'Student',
 			'foreignKey' => 'StudentID',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-		'OwnerStudentProfileAddress' => array(
+		'MyStudentProfileAddress' => array(
 			'className' => 'Address',
 			'foreignKey' => 'AddressID',
 			'conditions' => '',

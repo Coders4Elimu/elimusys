@@ -180,6 +180,22 @@ height: 30px;
 padding: 10px;
 }
 
+/** Related **/
+div.related {
+	clear: both;
+	display: block;
+}
+
+div.actions {
+	float:left;
+	width:16%;
+	padding:10px 1.5%;
+}
+div.actions h3 {
+	padding-top:0;
+	color:#777;
+}
+
 div.actions ul {
 	margin: 0;
 	padding: 0;
@@ -201,3 +217,31 @@ div.actions ul li a {
 div.actions ul li a:hover {
 	text-decoration: underline;
 }
+/* View details*/
+div.view {
+	float:right;
+	width:76%;
+	border-left:1px solid #666;
+	padding:10px 2%;
+}
+
+/** Scaffold View **/
+dl {
+	line-height: 2em;
+	margin: 0em 0em;
+	width: 60%;
+}
+dl .altrow {
+	background: #f4f4f4;
+}
+dt {
+	font-weight: bold;
+	padding-left: 4px;
+	vertical-align: top;
+}
+dd {
+	margin-left: 10em;
+	margin-top: -2em;
+	vertical-align: top;
+}
+

@@ -1,14 +1,9 @@
 <div class="schools view">
 <h2><?php  __('School');?></h2>
 	<dl><?php $i = 0; $class = ' class="altrow"';?>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('SchoolID'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Language'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $school['School']['SchoolID']; ?>
-			&nbsp;
-		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('LanguageID'); ?></dt>
-		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $school['School']['LanguageID']; ?>
+			<?php echo $languageOptions[$school['School']['LanguageID']]; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Name'); ?></dt>
@@ -26,7 +21,7 @@
 			<?php echo $school['School']['Fax']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('WebSite'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Website'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $school['School']['WebSite']; ?>
 			&nbsp;
@@ -36,7 +31,7 @@
 			<?php echo $school['School']['Email']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('DateFounded'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Date Founded'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $school['School']['DateFounded']; ?>
 			&nbsp;
@@ -46,6 +41,36 @@
 			<?php echo $school['School']['Details']; ?>
 			&nbsp;
 		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Address Line1'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $school['Address']['AddressLine1']; ?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Address Line2'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $school['Address']['AddressLine2']; ?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('City'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $school['Address']['City']; ?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Country'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $school['Address']['Country']; ?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Postal Code'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $school['Address']['PostalCode']; ?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Address Notes'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $school['Address']['Details']; ?>
+			&nbsp;
+		</dd>
 	</dl>
 </div>
 <div class="actions">
@@ -53,62 +78,16 @@
 	<ul>
 		<li><?php echo $this->Html->link(__('Edit School', true), array('action' => 'edit', $school['School']['SchoolID'])); ?> </li>
 		<li><?php echo $this->Html->link(__('Delete School', true), array('action' => 'delete', $school['School']['SchoolID']), null, sprintf(__('Are you sure you want to delete # %s?', true), $school['School']['SchoolID'])); ?> </li>
-		<li><?php echo $this->Html->link(__('List Schools', true), array('action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New School', true), array('action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Schoolsaddresses', true), array('controller' => 'schoolsaddresses', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New The School Official Addresses', true), array('controller' => 'schoolsaddresses', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Schoolstaffs', true), array('controller' => 'schoolstaffs', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New The School Work Staffers', true), array('controller' => 'schoolstaffs', 'action' => 'add')); ?> </li>
-		<li><?php echo $this->Html->link(__('List Teachers', true), array('controller' => 'teachers', 'action' => 'index')); ?> </li>
-		<li><?php echo $this->Html->link(__('New The School Teachers', true), array('controller' => 'teachers', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('Create School', true), array('action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('View Staff Members', true), array('controller' => 'schoolstaffs', 'action' => 'index',$school['School']['SchoolID'])); ?> </li>
+		<li><?php echo $this->Html->link(__('Add Staff Member', true), array('controller' => 'schoolstaffs', 'action' => 'add')); ?> </li>
+		<li><?php echo $this->Html->link(__('View Teachers', true), array('controller' => 'teachers', 'action' => 'index',$school['School']['SchoolID'])); ?> </li>
+		<li><?php echo $this->Html->link(__('Add Teacher', true), array('controller' => 'teachers', 'action' => 'add')); ?> </li>
 	</ul>
 </div>
-<div class="related">
-	<h3><?php __('Related Schoolsaddresses');?></h3>
-	<?php if (!empty($school['TheSchoolOfficialAddresses'])):?>
-	<table cellpadding = "0" cellspacing = "0">
-	<tr>
-		<th><?php __('ID'); ?></th>
-		<th><?php __('AddressID'); ?></th>
-		<th><?php __('SchoolID'); ?></th>
-		<th><?php __('StartDate'); ?></th>
-		<th><?php __('EndDate'); ?></th>
-		<th><?php __('Details'); ?></th>
-		<th class="actions"><?php __('Actions');?></th>
-	</tr>
-	<?php
-		$i = 0;
-		foreach ($school['TheSchoolOfficialAddresses'] as $theSchoolOfficialAddresses):
-			$class = null;
-			if ($i++ % 2 == 0) {
-				$class = ' class="altrow"';
-			}
-		?>
-		<tr<?php echo $class;?>>
-			<td><?php echo $theSchoolOfficialAddresses['ID'];?></td>
-			<td><?php echo $theSchoolOfficialAddresses['AddressID'];?></td>
-			<td><?php echo $theSchoolOfficialAddresses['SchoolID'];?></td>
-			<td><?php echo $theSchoolOfficialAddresses['StartDate'];?></td>
-			<td><?php echo $theSchoolOfficialAddresses['EndDate'];?></td>
-			<td><?php echo $theSchoolOfficialAddresses['Details'];?></td>
-			<td class="actions">
-				<?php echo $this->Html->link(__('View', true), array('controller' => 'schoolsaddresses', 'action' => 'view', $theSchoolOfficialAddresses['ID'])); ?>
-				<?php echo $this->Html->link(__('Edit', true), array('controller' => 'schoolsaddresses', 'action' => 'edit', $theSchoolOfficialAddresses['ID'])); ?>
-				<?php echo $this->Html->link(__('Delete', true), array('controller' => 'schoolsaddresses', 'action' => 'delete', $theSchoolOfficialAddresses['ID']), null, sprintf(__('Are you sure you want to delete # %s?', true), $theSchoolOfficialAddresses['ID'])); ?>
-			</td>
-		</tr>
-	<?php endforeach; ?>
-	</table>
-<?php endif; ?>
 
-	<div class="actions">
-		<ul>
-			<li><?php echo $this->Html->link(__('New The School Official Addresses', true), array('controller' => 'schoolsaddresses', 'action' => 'add'));?> </li>
-		</ul>
-	</div>
-</div>
 <div class="related">
-	<h3><?php __('Related Schoolstaffs');?></h3>
+	<h3><?php __('Staff Members');?></h3>
 	<?php if (!empty($school['TheSchoolWorkStaffers'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
@@ -149,12 +128,12 @@
 
 	<div class="actions">
 		<ul>
-			<li><?php echo $this->Html->link(__('New The School Work Staffers', true), array('controller' => 'schoolstaffs', 'action' => 'add'));?> </li>
+			<li><?php echo $this->Html->link(__('Add a Staff Member', true), array('controller' => 'schoolstaffs', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
 </div>
 <div class="related">
-	<h3><?php __('Related Teachers');?></h3>
+	<h3><?php __('School Teachers');?></h3>
 	<?php if (!empty($school['TheSchoolTeachers'])):?>
 	<table cellpadding = "0" cellspacing = "0">
 	<tr>
@@ -197,7 +176,7 @@
 
 	<div class="actions">
 		<ul>
-			<li><?php echo $this->Html->link(__('New The School Teachers', true), array('controller' => 'teachers', 'action' => 'add'));?> </li>
+			<li><?php echo $this->Html->link(__('Add a Teacher', true), array('controller' => 'teachers', 'action' => 'add'));?> </li>
 		</ul>
 	</div>
 </div>

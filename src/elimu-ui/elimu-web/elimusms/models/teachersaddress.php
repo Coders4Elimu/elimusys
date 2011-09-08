@@ -5,14 +5,14 @@ class Teachersaddress extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
-		'OwnerTeacher' => array(
+		'MyTeacherProfileInformation' => array(
 			'className' => 'Teacher',
 			'foreignKey' => 'TeacherID',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
-		'OwnerTeacherAddress' => array(
+		'MyTeacherProfileAddress' => array(
 			'className' => 'Address',
 			'foreignKey' => 'AddressID',
 			'conditions' => '',

@@ -14,6 +14,7 @@ class Address extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+			
 		),
 		'City' => array(
 			'notempty' => array(
@@ -24,18 +25,20 @@ class Address extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+		
 		),
 		'Country' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
-				'message' => "Please provide a Country!",
+				'message' => "Please provide a valid Country!",
 				//'allowEmpty' => false,
 				//'required' => false,
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
+			
 		),
-		'Country' => array(
+		'PostalCode' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
 				'message' => "Please provide a Postal Code!",
@@ -44,14 +47,7 @@ class Address extends AppModel {
 				//'last' => false, // Stop validation after this rule
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
-			'alphanumeric' => array(
-				'rule' => array('alphanumeric'),
-				'message' => "Please provide a valid Postal Code!",
-				//'allowEmpty' => false,
-				//'required' => false,
-				//'last' => false, // Stop validation after this rule
-				//'on' => 'create', // Limit validation to 'create' or 'update' operations
-			),
+			
 		),
 		
 		
@@ -60,7 +56,7 @@ class Address extends AppModel {
 		'AddressOfSchool' => array(
 			'className' => 'Schoolsaddress',
 			'foreignKey' => 'AddressID',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -71,6 +67,13 @@ class Address extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+	
+function beforeSave(&$model)
+	{
+		#echo "<h5>Before Save Address</h5>";
+		#debug($this->data);
+		return TRUE;
+	}
 
 }
 ?>

@@ -1,14 +1,18 @@
+<?php 
+	#Enter the breadcrumbs path 
+	$this->Html->addCrumb(__('View Schools', true), '/schools');
+?>
 <div class="schools index">
 	<h2><?php __('Schools');?></h2>
 	<table class="listing" cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('LanguageID');?></th>
+			<th><?php echo $this->Paginator->sort('Language','LanguageID');?></th>
 			<th><?php echo $this->Paginator->sort('Name');?></th>
 			<th><?php echo $this->Paginator->sort('Phone');?></th>
 			<th><?php echo $this->Paginator->sort('Fax');?></th>
 			<th><?php echo $this->Paginator->sort('WebSite');?></th>
 			<th><?php echo $this->Paginator->sort('Email');?></th>
-			<th><?php echo $this->Paginator->sort('DateFounded');?></th>
+			<th><?php echo $this->Paginator->sort('Date Founded','DateFounded');?></th>
 			<th><?php echo $this->Paginator->sort('Details');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
@@ -57,11 +61,9 @@
 	
 			<li><?php echo $this->Html->link(__('List Schools', true), array('action' => 'index'));?></li>
 			<li><?php echo $this->Html->link(__('Add New School', true), array('action' => 'add'));?></li>
-			<li><?php echo $this->Html->link(__('List School Addresses', true), array('controller' => 'schoolsaddresses', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('Add School Address', true), array('controller' => 'schoolsaddresses', 'action' => 'add')); ?> </li>
-			<li><?php echo $this->Html->link(__('List School Staff', true), array('controller' => 'schoolstaffs', 'action' => 'index')); ?> </li>
-			<li><?php echo $this->Html->link(__('Add School Staff', true), array('controller' => 'schoolstaffs', 'action' => 'add')); ?> </li>
-			<li><?php echo $this->Html->link(__('List Teachers', true), array('controller' => 'teachers', 'action' => 'index')); ?> </li>
+			<li><?php echo $this->Html->link(__('View Teachers', true), array('controller' => 'teachers', 'action' => 'index')); ?> </li>
 			<li><?php echo $this->Html->link(__('Add a Teacher', true), array('controller' => 'teachers', 'action' => 'add')); ?> </li>
-		</ul>
+			<li><?php echo $this->Html->link(__('View School Staff', true), array('controller' => 'schoolstaffs', 'action' => 'index')); ?> </li>
+			<li><?php echo $this->Html->link(__('Add School Staff', true), array('controller' => 'schoolstaffs', 'action' => 'add')); ?> </li>
+			</ul>
 </div>

@@ -50,7 +50,9 @@
  *
  */
 	if (!defined('CAKE_CORE_INCLUDE_PATH')) {
-		define('CAKE_CORE_INCLUDE_PATH', 'C:' . DS . 'Dev' . DS . 'Workspace' . DS . 'cakephp');
+		#/home1/hakilien/public_html
+		define('CAKE_CORE_INCLUDE_PATH', 'C:' .  DS . 'Dev' . DS . 'Workspace'. DS . 'elimusys'. DS . 'src'. DS . 'elimu-ui'. DS . 'elimu-web'.  DS . 'cakephp');
+		#define('CAKE_CORE_INCLUDE_PATH',  DS . 'home1' . DS . 'hakilien' . DS . 'cakephp');
 	}
 
 /**

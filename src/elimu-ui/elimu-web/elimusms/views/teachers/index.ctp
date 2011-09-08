@@ -1,15 +1,17 @@
+<?php 
+	$this->Html->addCrumb(__('View Teachers', true), '/teachers');
+?>
 <div class="teachers index">
 	<h2><?php __('Teachers');?></h2>
 	<table cellpadding="0" cellspacing="0">
 	<tr>
-			<th><?php echo $this->Paginator->sort('TeacherID');?></th>
-			<th><?php echo $this->Paginator->sort('SchoolID');?></th>
-			<th><?php echo $this->Paginator->sort('FirstName');?></th>
-			<th><?php echo $this->Paginator->sort('LastName');?></th>
-			<th><?php echo $this->Paginator->sort('MiddleName');?></th>
-			<th><?php echo $this->Paginator->sort('Phone');?></th>
-			<th><?php echo $this->Paginator->sort('dob');?></th>
-			<th><?php echo $this->Paginator->sort('Details');?></th>
+			<th><?php echo $this->Paginator->sort('School Name','SchoolID');?></th>
+			<th><?php echo $this->Paginator->sort('First Name','FirstName');?></th>
+			<th><?php echo $this->Paginator->sort('Middle Name','MiddleName');?></th>
+			<th><?php echo $this->Paginator->sort('Last Name','LastName');?></th>
+			<th><?php echo $this->Paginator->sort('Phone Number','Phone');?></th>
+			<th><?php echo $this->Paginator->sort('Date Of Birth','dob');?></th>
+			<th><?php echo $this->Paginator->sort('Details','Resume');?></th>
 			<th class="actions"><?php __('Actions');?></th>
 	</tr>
 	<?php
@@ -21,11 +23,10 @@
 		}
 	?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $teacher['Teacher']['TeacherID']; ?>&nbsp;</td>
-		<td><?php echo $teacher['Teacher']['SchoolID']; ?>&nbsp;</td>
+		<td><?php echo $schoolOptions[$teacher['Teacher']['SchoolID']]; ?>&nbsp;</td>
 		<td><?php echo $teacher['Teacher']['FirstName']; ?>&nbsp;</td>
-		<td><?php echo $teacher['Teacher']['LastName']; ?>&nbsp;</td>
 		<td><?php echo $teacher['Teacher']['MiddleName']; ?>&nbsp;</td>
+		<td><?php echo $teacher['Teacher']['LastName']; ?>&nbsp;</td>
 		<td><?php echo $teacher['Teacher']['Phone']; ?>&nbsp;</td>
 		<td><?php echo $teacher['Teacher']['dob']; ?>&nbsp;</td>
 		<td><?php echo $teacher['Teacher']['Details']; ?>&nbsp;</td>

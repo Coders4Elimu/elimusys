@@ -53,7 +53,7 @@ class School extends AppModel {
 		'SchoolAddress' => array(
 			'className' => 'Schoolsaddress',
 			'foreignKey' => 'SchoolID',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -70,7 +70,7 @@ class School extends AppModel {
 		'TheSchoolWorkStaffers' => array(
 			'className' => 'Schoolstaff',
 			'foreignKey' => 'SchoolID',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -83,7 +83,20 @@ class School extends AppModel {
 		'TheSchoolTeachers' => array(
 			'className' => 'Teacher',
 			'foreignKey' => 'SchoolID',
-			'dependent' => false,
+			'dependent' => true,
+			'conditions' => '',
+			'fields' => '',
+			'order' => '',
+			'limit' => '',
+			'offset' => '',
+			'exclusive' => '',
+			'finderQuery' => '',
+			'counterQuery' => ''
+		),
+		'Students' => array(
+			'className' => 'Student',
+			'foreignKey' => 'SchoolID',
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -94,6 +107,13 @@ class School extends AppModel {
 			'counterQuery' => ''
 		)
 	);
+	
+	function beforeSave(&$model)
+	{
+		#echo "<h5>Before Save School</h5>";
+		#debug($this->data);
+		return TRUE;
+	}
 
 }
 ?>

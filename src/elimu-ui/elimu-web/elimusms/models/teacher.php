@@ -4,6 +4,16 @@ class Teacher extends AppModel {
 	var $primaryKey = 'TeacherID';
 	var $displayField = 'FirstName';
 	var $validate = array(
+		'SchoolID' => array(
+			'notempty' => array(
+				'rule' => array('notempty'),
+				'message' => "Please select a school",
+				//'allowEmpty' => false,
+				//'required' => false,
+				//'last' => false, // Stop validation after this rule
+				//'on' => 'create', // Limit validation to 'create' or 'update' operations
+			),
+		),
 		'FirstName' => array(
 			'notempty' => array(
 				'rule' => array('notempty'),
@@ -38,7 +48,7 @@ class Teacher extends AppModel {
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
-		'OwnerTeacherSchool' => array(
+		'TeacherCurrentSchool' => array(
 			'className' => 'School',
 			'foreignKey' => 'SchoolID',
 			'conditions' => '',
@@ -46,12 +56,12 @@ class Teacher extends AppModel {
 			'order' => ''
 		)
 	);
-
-	var $hasMany = array(
-		'MyTeacherAddresses' => array(
+	
+	var $hasOne = array(
+		'MyTeacherAddress' => array(
 			'className' => 'Teachersaddress',
 			'foreignKey' => 'TeacherID',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',
@@ -61,10 +71,14 @@ class Teacher extends AppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
+	);
+
+	var $hasMany = array(
+		
 		'MyTeacherClasses' => array(
 			'className' => 'Course',
 			'foreignKey' => 'TeacherID',
-			'dependent' => false,
+			'dependent' => true,
 			'conditions' => '',
 			'fields' => '',
 			'order' => '',

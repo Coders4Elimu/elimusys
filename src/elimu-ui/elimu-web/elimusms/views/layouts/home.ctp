@@ -101,8 +101,8 @@
 		        		
 		        </li>
 		        <li><?php echo $this->Html->link('Student Demo',array('controller' => 'students', 'action' => 'index'));?></li>
-		        <li><?php echo $this->Html->link('School Demo',array('controller' => 'teachers', 'action' => 'index'));?></li>
-		        <li class="last"><?php echo $this->Html->link('School Demo',array('controller' => 'classes', 'action' => 'index'));?></li>
+		        <li><?php echo $this->Html->link('Teacher Demo',array('controller' => 'teachers', 'action' => 'index'));?></li>
+		        <li class="last"><?php echo $this->Html->link('Course Demo',array('controller' => 'classes', 'action' => 'index'));?></li>
 		      </ul>
 		    </div>
 		    <br class="clear" />
@@ -181,38 +181,39 @@
 		      </div>
 		      <div class="column2">
 		        <h2>What's new?</h2>
-		        <img class="imgl" src="img/demo/imgl.gif" alt="" />
+		       <a href="#"><?php echo $this->Html->image('maristes.jpg', array('alt'=> __('Ecole Maristes', true), 'border' => '0', "width"=>80, "height"=>80, 'class'=>'img1'))?>
 		       		<?php echo $this->Session->flash(); ?>
+				<p> Coming soon a whole lot of system upgrades and features for our users.
 
-					<?php echo $content_for_layout; ?>
+					
 		      </div>
 		    </div>
 		    <div class="fl_right">
 		      <h2>Latest From The School Blog</h2>
 		      <ul>
 		        <li>
-		          <div class="imgholder"><a href="#"><?php echo $this->Html->image('maristes.jpg', array('alt'=> __('Teacher', true), 'border' => '0', "width"=>80, "height"=>80))?></a></div>
+		          <div class="imgholder"><a href="#"><?php echo $this->Html->image('maristes.jpg', array('alt'=> __('Ecole Maristes', true), 'border' => '0', "width"=>80, "height"=>80))?></a></div>
 		          <p><strong><a href="#">Elimu upgraded to 1.0</a></strong></p>
 		          <p>Elimu has been upgraded schoolwide to the latest release 1.0. New functionality has been added that allows student to turn in homework through the Student Portal.</p>
 		        </li>
 		        <li>
-		          <div class="imgholder"><a href="#"><?php echo $this->Html->image('maristes.jpg', array('alt'=> __('Teacher', true), 'border' => '0', "width"=>80, "height"=>80))?></a></div>
+		          <div class="imgholder"><a href="#"><?php echo $this->Html->image('maristes.jpg', array('alt'=> __('Ecole Maristes', true), 'border' => '0', "width"=>80, "height"=>80))?></a></div>
 		          <p><strong><a href="#">Parent/Teacher Meeting</a></strong></p>
 		          <p>Parents will meet with teachers on Wednesday November 16 2011 at 18:00 to discuss their children's progress and bring up any concerns they might have. An email reminder
 		          will be sent out a week before the meeting.</p>
 		        </li>
 		        <li>
-		          <div class="imgholder"><a href="#"><?php echo $this->Html->image('maristes.jpg', array('alt'=> __('Teacher', true), 'border' => '0', "width"=>80, "height"=>80))?></a></div>
+		          <div class="imgholder"><a href="#"><?php echo $this->Html->image('maristes.jpg', array('alt'=> __('Ecole Maristes', true), 'border' => '0', "width"=>80, "height"=>80))?></a></div>
 		          <p><strong><a href="#">Note from the School Administration Office</a></strong></p>
 		          <p>We would like to remind students that all cell phones should be turned off or put on silent during school hours, which are from 8:00 to 17:00.</p>
 		        </li>
 		        <li>
-		          <div class="imgholder"><a href="#"><?php echo $this->Html->image('maristes.jpg', array('alt'=> __('Teacher', true), 'border' => '0', "width"=>80, "height"=>80))?></a></div>
+		          <div class="imgholder"><a href="#"><?php echo $this->Html->image('maristes.jpg', array('alt'=> __('Ecole Maristes', true), 'border' => '0', "width"=>80, "height"=>80))?></a></div>
 		          <p><strong><a href="#">Upcoming Holiday</a></strong></p>
 		          <p>School will be closed August 7th 2011 in observance of the Independance Day</p>
 		        </li>
 		        <li class="last">
-		          <div class="imgholder"><a href="#"><?php echo $this->Html->image('maristes.jpg', array('alt'=> __('Teacher', true), 'border' => '0', "width"=>80, "height"=>80))?></a></div>
+		          <div class="imgholder"><a href="#"><?php echo $this->Html->image('maristes.jpg', array('alt'=> __('Ecole Maristes', true), 'border' => '0', "width"=>80, "height"=>80))?></a></div>
 		          <p><strong><a href="#">Register for Your Classes</a></strong></p>
 		          <p>School opens on October 5th 2011. Make sure to register your children by September 25th 2011.</p>
 		        </li>
