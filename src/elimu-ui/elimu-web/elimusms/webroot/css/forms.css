@@ -1,0 +1,247 @@
+/*
+Template Name: School Education
+File: Forms CSS
+Author: OS Templates
+Author URI: http://www.os-templates.com/
+Licence: <a href="http://www.os-templates.com/template-terms">Website Template Licence</a>
+*/
+
+form, fieldset, legend{margin:0; padding:0; border:none;}
+legend{display:none;}
+input, textarea, select{font-size:12px; font-family:Verdana, Arial, Helvetica, sans-serif;}
+
+/* ----------------------------------------------Forms in Content Area-------------------------------------*/
+
+#container #respond{display: block; width:100%;}
+
+#container #respond input{width:170px; padding:2px; border:1px solid #CCCCCC; margin:5px 5px 0 0;}
+
+#container #respond textarea{width:98%; border:1px solid #CCCCCC; padding:2px; overflow:auto;}
+	
+#container #respond p{margin:5px 0;}
+
+#container #respond #submit, #container #respond #reset{
+	margin:0;
+	padding:5px;
+	color:#666666;
+	background-color:#F7F7F7;
+	border:1px solid #CCCCCC;
+	cursor:pointer;
+	}
+	
+	
+.form 
+{
+	margin:0 auto;
+	width:400px;
+}
+
+label 
+{
+	display: block;
+	margin-top: 20px;
+	font-size:1.2em;
+	font-weight:bold;
+}
+
+input, textarea 
+{
+	width: 379px;
+	background: #efefef;
+	border: 1px solid #ddd;
+	font-size: 1.2em;
+	color: #444;
+	height: 15px;
+	padding: 10px;
+	margin-top: 3px;
+	border-radius: 6px;
+}
+/*
+select 
+{ 
+	border:0; 
+	color:#444; 
+	background:transparent;
+	font-size:1.2em;
+	font-weight:bold; 
+	padding:5px 10px; 
+	width:378px;
+	*width:350px; 
+	*background:#efefef; 
+	-webkit-apperance:none;
+}
+
+.selectionwrapper 
+{ 
+	overflow:hidden; 
+	width:350px;
+	border-radius: 6px;
+
+	background: url("../img/arrow.gif") 
+	no-repeat scroll 319px 5px #efefef; 
+}
+*/
+
+textarea 
+{
+	height: 213px;
+}
+
+input:focus, textarea:focus 
+{
+	border:1px solid #99cc66;
+}
+
+#container #respond #submit, #container #respond #reset {
+    background-color: #F7F7F7;
+    border: 1px solid #CCCCCC;
+    color: #666666;
+    cursor: pointer;
+    margin: 0;
+    padding: 5px;
+}
+
+form .submit input[type=submit] {
+	background-color: #58B14C;
+    border: 1px solid #CCCCCC;
+    font-size:20px;
+	font-weight:bold; 
+    color: #fff;
+    cursor: pointer;
+    height: 35px;
+    margin: 0;
+    padding: 5px;
+    margin-top:5px;
+    font-size: 110%;
+	width: auto;
+}
+form .submit input[type=submit]:hover {
+	background:#4ca83d;
+	background: -webkit-gradient(linear, left top, left bottom, from(#85e573), to(#4ca83d));
+	background-image: -moz-linear-gradient(top, #85e573, #4ca83d);
+}
+
+form .required label:after {
+	color: #e32;
+	content: '*';
+	display:inline;
+}
+
+/** Notices and Errors **/
+div.message {
+	clear: both;
+	color: #fff;
+	font-size: 140%;
+	font-weight: bold;
+	margin: 0 0 1em 0;
+	background: #c73e14;
+	padding: 5px;
+}
+div.error-message {
+	clear: both;
+	color: #fff;
+	font-weight: bold;
+	background: #c73e14;
+}
+p.error {
+	background-color: #e32;
+	color: #fff;
+	font-family: Courier, monospace;
+	font-size: 120%;
+	line-height: 140%;
+	padding: 0.8em;
+	margin: 1em 0;
+}
+p.error em {
+	color: #000;
+	font-weight: normal;
+	line-height: 140%;
+}
+.notice {
+	background: #ffcc00;
+	color: #000;
+	display: block;
+	font-family: Courier, monospace;
+	font-size: 120%;
+	line-height: 140%;
+	padding: 0.8em;
+	margin: 1em 0;
+}
+.success {
+	background: green;
+	color: #fff;
+}
+
+div.form h2, #container div.form h2
+{
+color: #fff;
+background-color: #666;
+height: 30px;
+padding: 10px;
+}
+
+/** Related **/
+div.related {
+	clear: both;
+	display: block;
+}
+
+div.actions {
+	float:left;
+	width:16%;
+	padding:10px 1.5%;
+}
+div.actions h3 {
+	padding-top:0;
+	color:#777;
+}
+
+div.actions ul {
+	margin: 0;
+	padding: 0;
+}
+div.actions li {
+	margin:0 0 0.5em 0;
+	list-style-type: square;
+	white-space: nowrap;
+	padding: 0;
+	float:left;
+	display:inline;
+	margin-right:5px;
+}
+div.actions ul li a {
+	font-weight: normal;
+	display: block;
+	clear: both;
+}
+div.actions ul li a:hover {
+	text-decoration: underline;
+}
+/* View details*/
+div.view {
+	float:right;
+	width:76%;
+	border-left:1px solid #666;
+	padding:10px 2%;
+}
+
+/** Scaffold View **/
+dl {
+	line-height: 2em;
+	margin: 0em 0em;
+	width: 60%;
+}
+dl .altrow {
+	background: #f4f4f4;
+}
+dt {
+	font-weight: bold;
+	padding-left: 4px;
+	vertical-align: top;
+}
+dd {
+	margin-left: 10em;
+	margin-top: -2em;
+	vertical-align: top;
+}
+
