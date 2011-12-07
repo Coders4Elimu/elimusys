@@ -43,7 +43,7 @@
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
 
-<!-- traduction des exceptions -->
+    <!-- traduction des exceptions -->
    <bean
      class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
  
