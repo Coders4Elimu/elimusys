@@ -38,19 +38,13 @@ public class Person implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name="personID", nullable=false)
     protected Long id;
-    @Column(name="title", nullable=false)
     @Enumerated(EnumType.STRING)
     protected Title title;
-    @Column(name="firstName")
     protected String firstName;
-    @Column(name="middleName")
     protected String middleName;
-    @Column(name="lastName")
     protected String lastName;
-    @Column(name="gender", nullable=false)
     @Enumerated(EnumType.STRING)
     protected Gender gender;
-    @Column(name="birthDayDate")
     @Temporal(TemporalType.DATE)
     protected Date birthDayDate;
     @OneToOne(targetEntity=Address.class, cascade={
@@ -195,8 +189,14 @@ public class Person implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 17;
+        hash += (title == null ? 1 : title.hashCode()) * hash;
+        hash += (firstName == null ? 1 : firstName.hashCode()) * hash;
+        hash += (middleName == null ? 1 : middleName.hashCode()) * hash;
+        hash += (lastName == null ? 1 : lastName.hashCode()) * hash;
+        hash += (gender != null ? gender.hashCode() : 0);
+        hash += (birthDayDate == null ? 1 : birthDayDate.hashCode()) * hash;
+        hash += (address == null ? 1 : address.hashCode()) * hash;
         return hash;
     }
 
@@ -207,10 +207,13 @@ public class Person implements Serializable {
             return false;
         }
         Person other = (Person) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return (title == null ? other.getTitle() == null : title.equals(other.getTitle()))
+                && (firstName == null ? other.getFirstName() == null : firstName.equals(other.getFirstName()))
+                && (middleName == null ? other.getMiddleName() == null : middleName.equals(other.getMiddleName()))
+                && (lastName == null ? other.getLastName() == null : lastName.equals(other.getLastName()))
+                && (gender == null ? other.getGender() == null : gender.equals(other.getGender()))
+                && (birthDayDate == null ? other.getBirthDayDate()== null : birthDayDate.equals(other.getBirthDayDate()))
+                && (address == null ? other.getAddress() == null : address.equals(other.getAddress()));
     }
 
     @Override

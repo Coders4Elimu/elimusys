@@ -33,6 +33,13 @@
     
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="datasource" />
+        <property name="jpaVendorAdapter">
+            <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="database" value="MYSQL"/>
+                <property name="showSql" value="true"/>
+                <property name="generateDdl" value="true"/>
+            </bean>
+        </property>
         <property name="persistenceUnitName" value="test-elimu-pu"/>
         <property name="loadTimeWeaver">
             <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
@@ -47,7 +54,7 @@
    <bean
      class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
  
-    <!-- annotations de persistance -->
+    <!-- bean post-processor for JPA annotations -->
     <bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
     </beans>

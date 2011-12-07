@@ -2,25 +2,27 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.coders4africa.elimu.model.dao;
+package org.coders4africa.elimu.model.dao.jpa;
 
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import org.coders4africa.elimu.model.dao.DAO;
 
 /**
  *
  * @author MSOMDA
  */
-public class AbstractDAO<T> implements DAO<T> {
+public class AbstractJpaDAO<T> implements DAO<T> {
 
-    @PersistenceContext
+    @PersistenceContext(type=PersistenceContextType.TRANSACTION)
     private EntityManager entityManager;
     private Class<T> entityClass;
 
-    public AbstractDAO(Class<T> entityClass) {
+    public AbstractJpaDAO(Class<T> entityClass) {
         this.entityClass = entityClass;
     }
     

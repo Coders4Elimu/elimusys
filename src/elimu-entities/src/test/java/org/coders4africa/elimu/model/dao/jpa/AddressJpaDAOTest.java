@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.coders4africa.elimu.model.dao;
+package org.coders4africa.elimu.model.dao.jpa;
 
 import javax.annotation.Resource;
 import org.coders4africa.elimu.model.Address;
@@ -21,12 +21,12 @@ import static org.junit.Assert.*;
  * @author MSOMDA
  */
 @ContextConfiguration({ConfigFilesLocator.DAOs})
-public class AddressDAOTest extends AbstractTransactionalTest {
+public class AddressJpaDAOTest extends AbstractTransactionalTest {
     
     @Resource(name="addressDAO")
-    AddressDAO dao;
+    AddressJpaDAO dao;
     
-    public AddressDAOTest() {
+    public AddressJpaDAOTest() {
     }
 
     @BeforeClass
@@ -48,7 +48,7 @@ public class AddressDAOTest extends AbstractTransactionalTest {
     @Test
     public void testCreate() {
         
-        assertTrue("La base devrait être vide", dao.count() == 0);
+        assertTrue("DB must be empty for use", dao.count() == 0);
         
         Address address = new Address();
         address.setCelPhone("0658888606");
@@ -58,7 +58,7 @@ public class AddressDAOTest extends AbstractTransactionalTest {
         
         dao.save(address);
         
-        assertTrue("La base devrait avoir 1 addresse", dao.count() == 1);
+        assertTrue("DB must contains one address", dao.count() == 1);
         
     }
 }

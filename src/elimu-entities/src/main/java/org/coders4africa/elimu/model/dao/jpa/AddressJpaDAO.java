@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.coders4africa.elimu.model.dao;
+package org.coders4africa.elimu.model.dao.jpa;
 
 
 import org.coders4africa.elimu.model.Address;
@@ -11,9 +11,9 @@ import org.coders4africa.elimu.model.Address;
  *
  * @author MSOMDA
  */
-public class AddressDAO extends AbstractDAO<Address> {
+public class AddressJpaDAO extends AbstractJpaDAO<Address> {
 
-    public AddressDAO() {
+    public AddressJpaDAO() {
         super(Address.class);
     }
 }

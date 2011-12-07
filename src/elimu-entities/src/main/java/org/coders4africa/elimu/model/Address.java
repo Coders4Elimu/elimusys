@@ -21,25 +21,17 @@ import javax.persistence.Table;
 public class Address implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
+    @Column(name="addressID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Column(name="street")
     private String street;
-    @Column(name="city")
     private String city;
-    @Column(name="state")
     private String state;
-    @Column(name="zipCode")
     private String zipCode;
-    @Column(name="country")
     private String country;
-    @Column(name="details")
     private String details;
-    @Column(name="landPhone")
     private String landPhone;
-    @Column(name="celPhone")
     private String celPhone;
-    @Column(name="email")
     private String email;
 
     
@@ -224,23 +216,35 @@ public class Address implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+    public int hashCode() {     
+        int hash = 37;
+        hash += (street == null ? 1 : street.hashCode()) * hash;
+        hash += (city == null ? 1 : city.hashCode()) * hash;
+        hash += (state == null ? 1 : state.hashCode()) * hash;
+        hash += (zipCode == null ? 1 : zipCode.hashCode()) * hash;
+        hash += (country != null ? country.hashCode() : 0);
+        hash += (details == null ? 1 : details.hashCode()) * hash;
+        hash += (landPhone == null ? 1 : landPhone.hashCode()) * hash;
+        hash += (celPhone == null ? 1 : celPhone.hashCode()) * hash;
+        hash += (email == null ? 1 : email.hashCode()) * hash;
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
         if (!(object instanceof Address)) {
             return false;
         }
         Address other = (Address) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
-            return false;
-        }
-        return true;
+        return (street == null ? other.getStreet() == null : street.equals(other.getStreet()))
+                && (city == null ? other.getCity() == null : city.equals(other.getCity()))
+                && (state == null ? other.getState() == null : state.equals(other.getState()))
+                && (zipCode == null ? other.getZipCode() == null : zipCode.equals(other.getZipCode()))
+                && (country == null ? other.getCountry() == null : country.equals(other.getCountry()))
+                && (details == null ? other.getDetails()== null : details.equals(other.getDetails()))
+                && (landPhone == null ? other.getLandPhone() == null : landPhone.equals(other.getLandPhone()))
+                && (celPhone == null ? other.getCelPhone() == null : celPhone.equals(other.getCelPhone()))
+                && (email == null ? other.getEmail() == null : email.equals(other.getEmail()));
     }
 
     @Override

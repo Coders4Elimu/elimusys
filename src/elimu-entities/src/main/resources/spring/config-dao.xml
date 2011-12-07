@@ -13,5 +13,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans 
            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
-    <bean id="addressDAO" class="org.coders4africa.elimu.model.dao.AddressDAO" />
+    <bean id="addressDAO" class="org.coders4africa.elimu.model.dao.jpa.AddressJpaDAO" />
+    <bean id="personDAO" class="org.coders4africa.elimu.model.dao.jpa.PersonJpaDAO" />
 </beans>

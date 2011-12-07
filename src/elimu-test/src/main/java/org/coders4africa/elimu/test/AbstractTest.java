@@ -11,9 +11,8 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
  *
  * @author MSOMDA
  */
-@ContextConfiguration(locations={"classpath:spring/test-context.xml"},
-       // loader=TestContextLoader.class,
-        inheritLocations=true)
+@ContextConfiguration(locations={
+    ConfigFilesLocator.EMPTY_CONFIG},loader=TestContextLoader.class,inheritLocations=true)
 public class AbstractTest extends AbstractJUnit4SpringContextTests {
     
     
