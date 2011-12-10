@@ -4,9 +4,9 @@
  */
 package org.coders4africa.elimu.school.model.dao.jpa;
 
+import javax.annotation.Resource;
 import org.springframework.test.context.ContextConfiguration;
 import org.coders4africa.elimu.test.ConfigFilesLocator;
-import javax.inject.Inject;
 import org.coders4africa.elimu.model.Address;
 import org.coders4africa.elimu.school.model.School;
 import org.coders4africa.elimu.test.AbstractTransactionalTest;
@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration({ConfigFilesLocator.DAOs})
 public class SchoolJpaDAOTest extends AbstractTransactionalTest{
     
-    @Inject
+    @Resource(name="schoolDAO")
     SchoolJpaDAO dao;
             
     public SchoolJpaDAOTest() {
@@ -49,7 +49,7 @@ public class SchoolJpaDAOTest extends AbstractTransactionalTest{
     @Test
     public void testCreate() {
         
-        assertTrue("DB must be empty for use", dao.count() == 0);
+        assertTrue("DB must be empty for use", countTableRows("schools") == 0);
         
         School school = new School();
         
@@ -67,6 +67,9 @@ public class SchoolJpaDAOTest extends AbstractTransactionalTest{
         
         dao.save(school);
         
-        assertTrue("DB must contain one school", dao.count() == 1);
+        dao.getEntityManager().flush();
+        
+        assertTrue("DB must contain one school", countTableRows("schools") == 1);
+        assertTrue("DB must contain one address", countTableRows("addresses") == 1);
     }
 }

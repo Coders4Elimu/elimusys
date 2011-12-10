@@ -10,7 +10,7 @@ package org.coders4africa.elimu.test;
  */
 public class ConfigFilesLocator {
     
-    public final static String EMPTY_CONFIG = "classpath:spring/test-context.xml";
+    public final static String TEST_CONFIG = "classpath:spring/test-context.xml";
     public final static String TEST_TRANSACTION = "classpath:spring/test-transaction.xml";
-    public final static String DAOs = "classpath:spring/config-dao*.xml";
+    public final static String DAOs = "classpath*:spring/config-dao*.xml";
 }

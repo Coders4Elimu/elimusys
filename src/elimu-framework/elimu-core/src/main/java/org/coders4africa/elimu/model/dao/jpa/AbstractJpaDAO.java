@@ -9,7 +9,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import org.coders4africa.elimu.model.dao.DAO;
-
 /**
  *
  * @author MSOMDA

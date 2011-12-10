@@ -4,7 +4,7 @@
  */
 package org.coders4africa.elimu.model.dao.jpa;
 
-import javax.inject.Inject;
+import javax.annotation.Resource;
 import org.coders4africa.elimu.model.Address;
 import org.coders4africa.elimu.test.AbstractTransactionalTest;
 import org.coders4africa.elimu.test.ConfigFilesLocator;
@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration({ConfigFilesLocator.DAOs})
 public class AddressJpaDAOTest extends AbstractTransactionalTest {
     
-    @Inject
+    @Resource(name="addressDAO")
     AddressJpaDAO dao;
     
     public AddressJpaDAOTest() {
@@ -48,7 +48,7 @@ public class AddressJpaDAOTest extends AbstractTransactionalTest {
     @Test
     public void testCreate() {
         
-        assertTrue("DB must be empty for use", dao.count() == 0);
+        assertTrue("DB must be empty for use", countTableRows("addresses") == 0);
         
         Address address = new Address();
         address.setCelPhone("0658888606");
@@ -58,7 +58,9 @@ public class AddressJpaDAOTest extends AbstractTransactionalTest {
         
         dao.save(address);
         
-        assertTrue("DB must contains one address", dao.count() == 1);
+        dao.getEntityManager().flush();
+        
+        assertTrue("DB must contains one address", countTableRows("addresses") == 1);
         
     }
 }

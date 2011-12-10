@@ -13,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import org.coders4africa.elimu.model.Address;
 
 /**
@@ -20,6 +21,7 @@ import org.coders4africa.elimu.model.Address;
  * @author MSOMDA
  */
 @Entity
+@Table(name="schools")
 public class School implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -139,7 +141,7 @@ public class School implements Serializable {
 
     @Override
     public String toString() {
-        return "School[ id=" + id + " ]";
+        return "School[ name=" + name + ", website="+ website +" ]";
     }
     
 }

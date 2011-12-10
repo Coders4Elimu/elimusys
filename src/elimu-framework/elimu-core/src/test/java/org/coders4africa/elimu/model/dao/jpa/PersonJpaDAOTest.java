@@ -5,7 +5,7 @@
 package org.coders4africa.elimu.model.dao.jpa;
 
 import java.util.Calendar;
-import javax.inject.Inject;
+import javax.annotation.Resource;
 import org.coders4africa.elimu.model.Address;
 import org.coders4africa.elimu.model.Person;
 import org.coders4africa.elimu.model.enums.Gender;
@@ -27,7 +27,7 @@ import static org.junit.Assert.*;
 @ContextConfiguration({ConfigFilesLocator.DAOs})
 public class PersonJpaDAOTest extends AbstractTransactionalTest {
     
-    @Inject
+    @Resource(name="personDAO")
     PersonJpaDAO dao;
     
     public PersonJpaDAOTest(){       
@@ -52,7 +52,7 @@ public class PersonJpaDAOTest extends AbstractTransactionalTest {
     @Test
     public void testCreate() {
         
-        assertTrue("DB must be empty for use", dao.count() == 0);
+        assertTrue("DB must be empty for use", countTableRows("persons") == 0);
         
         Person person = new Person();
         
@@ -72,7 +72,10 @@ public class PersonJpaDAOTest extends AbstractTransactionalTest {
         
         dao.save(person);
         
-        assertTrue("DB must contain one person", dao.count() == 1);
+        dao.getEntityManager().flush();
+        
+        assertTrue("DB must contain one person", countTableRows("persons") == 1);
+        assertTrue("DB must contain one address", countTableRows("addresses") == 1);
         
     }
 }

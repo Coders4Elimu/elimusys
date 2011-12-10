@@ -6,6 +6,7 @@ package org.coders4africa.elimu.test;
 
 import javax.inject.Inject;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
@@ -32,4 +33,7 @@ public class AbstractTransactionalTest extends AbstractTest{
         jdbcTemplate = new SimpleJdbcTemplate(dataSource);
     }
     
+    public int countTableRows(String tableName){
+        return jdbcTemplate.queryForInt("select count(0) from "+ tableName);
+    }
 }

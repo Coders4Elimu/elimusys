@@ -16,7 +16,7 @@
     <bean id="org.coders4africa.elimu" class="org.springframework.context.support.ClassPathXmlApplicationContext">
         <constructor-arg>
             <list>
-                <value>classpath*:spring/*.xml</value>
+                <value>classpath*:spring/config*.xml</value>
             </list>
         </constructor-arg>
     </bean>
