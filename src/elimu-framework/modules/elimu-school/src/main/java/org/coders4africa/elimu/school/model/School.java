@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 import org.coders4africa.elimu.model.Address;
 
 /**
@@ -22,6 +23,7 @@ import org.coders4africa.elimu.model.Address;
  */
 @Entity
 @Table(name="schools")
+@XmlRootElement
 public class School implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

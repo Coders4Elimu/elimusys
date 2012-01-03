@@ -17,10 +17,9 @@
    </developers>
    <description>Elimu is an open source school management system</description>
   <modules>
-    <module>elimu-framework/elimu-spring</module>
     <module>elimu-framework/elimu-test</module>
     <module>elimu-framework/elimu-core</module>
     <module>elimu-framework/modules/elimu-school</module>
-    <module>elimu-service</module>
+    <module>elimu-service/school-service</module>
   </modules>
 </project>
