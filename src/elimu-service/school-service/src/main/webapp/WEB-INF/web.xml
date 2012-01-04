@@ -25,6 +25,16 @@
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
+    <!-- Apply Open Session in View Pattern to Avoid LazyInitializationException -->
+    <filter>
+        <filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
+        <filter-class>org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Spring OpenEntityManagerInViewFilter</filter-name>
+        <url-pattern>/restservices/*</url-pattern>
+    </filter-mapping>
+    
     <!-- REST Services -->
     <servlet>
         <servlet-name>Jersey Spring Servlet</servlet-name>
@@ -41,6 +51,6 @@
         <persistence-unit-name>elimusys-pu</persistence-unit-name>
     </persistence-unit-ref-->
     <welcome-file-list>
-        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>test-services.html</welcome-file>
     </welcome-file-list>
 </web-app>

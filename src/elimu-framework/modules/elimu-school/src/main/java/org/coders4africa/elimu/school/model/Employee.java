@@ -10,12 +10,10 @@ import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlRootElement;
 import org.coders4africa.elimu.model.Person;
 import org.coders4africa.elimu.school.model.enums.SchoolEmployeeFunctions;
 
@@ -25,6 +23,7 @@ import org.coders4africa.elimu.school.model.enums.SchoolEmployeeFunctions;
  */
 @Entity
 @Table(name="schoolemployees")
+@XmlRootElement
 public class Employee extends Person implements Serializable {
     private static final long serialVersionUID = 1L;
 

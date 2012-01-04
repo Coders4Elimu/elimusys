@@ -23,6 +23,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlRootElement;
 import org.coders4africa.elimu.model.enums.Gender;
 import org.coders4africa.elimu.model.enums.Title;
 
@@ -33,6 +34,7 @@ import org.coders4africa.elimu.model.enums.Title;
 @Entity
 @Table(name="persons")
 @Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+@XmlRootElement
 public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id

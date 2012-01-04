@@ -14,7 +14,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import org.coders4africa.elimu.model.Address;
 
 /**
@@ -38,79 +40,41 @@ public class School implements Serializable {
     @JoinColumn(name="addressID",unique=true,nullable=false)
     private Address address;
 
-    /**
-     * Get the value of address
-     *
-     * @return the value of address
-     */
+
     public Address getAddress() {
         return address;
     }
 
-    /**
-     * Set the value of address
-     *
-     * @param address new value of address
-     */
     public void setAddress(Address address) {
         this.address = address;
     }
 
-
-    /**
-     * Get the value of website
-     *
-     * @return the value of website
-     */
     public String getWebsite() {
         return website;
     }
 
-    /**
-     * Set the value of website
-     *
-     * @param website new value of website
-     */
     public void setWebsite(String website) {
         this.website = website;
     }
 
-    /**
-     * Get the value of fax
-     *
-     * @return the value of fax
-     */
     public String getFax() {
         return fax;
     }
 
-    /**
-     * Set the value of fax
-     *
-     * @param fax new value of fax
-     */
     public void setFax(String fax) {
         this.fax = fax;
     }
 
-    /**
-     * Get the value of name
-     *
-     * @return the value of name
-     */
+    @XmlAttribute
     public String getName() {
         return name;
     }
 
-    /**
-     * Set the value of name
-     *
-     * @param name new value of name
-     */
     public void setName(String name) {
         this.name = name;
     }
 
+    @XmlTransient
     public Long getId() {
         return id;
     }
