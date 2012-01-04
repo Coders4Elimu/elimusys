@@ -1,0 +1,2 @@
+insert into addresses value (null,'0659828606','Paris','Fance','','contact@mySchool.com','0187652443','Ile de France','01 rue du Faubourg','75462');
+insert into schools values (null,'0167930863','mySchool','www.mySchool.com',1);

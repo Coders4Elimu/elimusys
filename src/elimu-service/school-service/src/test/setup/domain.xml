@@ -1,0 +1,93 @@
+<domain log-root="${com.sun.aas.instanceRoot}/logs" application-root="${com.sun.aas.instanceRoot}/applications" version="12">
+  <system-applications></system-applications>
+  <applications></applications>
+  <resources>
+    <jdbc-connection-pool connection-validation-method="auto-commit" datasource-classname="com.mysql.jdbc.jdbc2.optional.MysqlDataSource" wrap-jdbc-objects="false" res-type="javax.sql.DataSource" description="Elimu jdbc connection pool" name="jdbcElimuConnectionPool">
+      <property name="URL" value="jdbc:mysql://localhost:3306/elimudb"></property>
+      <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
+      <property name="Password" value="r1515t"></property>
+      <property name="portNumber" value="3306"></property>
+      <property name="databaseName" value="elimudb"></property>
+      <property name="User" value="root"></property>
+      <property name="serverName" value="localhost"></property>
+    </jdbc-connection-pool>
+    <jdbc-resource pool-name="jdbcElimuConnectionPool" jndi-name="jdbc/elimu"></jdbc-resource>
+  </resources>
+  <servers>
+    <server name="server" config-ref="server-config">
+      <resource-ref ref="jdbc/elimu"></resource-ref>
+    </server>
+  </servers>
+  <nodes>
+    <node node-host="localhost" name="localhost-domain1" type="CONFIG" install-dir="${com.sun.aas.productRoot}"></node>
+  </nodes>
+  <configs>
+    <config name="server-config">
+      <http-service>
+        <access-log></access-log>
+        <virtual-server id="server" network-listeners="http-listener-1"></virtual-server>
+      </http-service>
+      <iiop-service></iiop-service>
+      <admin-service></admin-service>
+      <connector-service></connector-service>
+      <web-container>
+        <session-config>
+          <session-manager>
+            <manager-properties></manager-properties>
+            <store-properties></store-properties>
+          </session-manager>
+          <session-properties></session-properties>
+        </session-config>
+      </web-container>
+      <ejb-container>
+        <ejb-timer-service></ejb-timer-service>
+      </ejb-container>
+      <mdb-container></mdb-container>
+      <jms-service default-jms-host="default_JMS_host" type="EMBEDDED">
+        <jms-host host="localhost" name="default_JMS_host"></jms-host>
+      </jms-service>
+      <security-service>
+        <auth-realm classname="com.sun.enterprise.security.auth.realm.certificate.CertificateRealm" name="certificate"></auth-realm>
+        <jacc-provider policy-provider="com.sun.enterprise.security.provider.PolicyWrapper" name="default" policy-configuration-factory-provider="com.sun.enterprise.security.provider.PolicyConfigurationFactoryImpl">
+          <property name="repository" value="${com.sun.aas.instanceRoot}/generated/policy"></property>
+        </jacc-provider>
+        <jacc-provider policy-provider="com.sun.enterprise.security.jacc.provider.SimplePolicyProvider" name="simple" policy-configuration-factory-provider="com.sun.enterprise.security.jacc.provider.SimplePolicyConfigurationFactory"></jacc-provider>
+        <audit-module classname="com.sun.enterprise.security.Audit" name="default">
+          <property name="auditOn" value="false"></property>
+        </audit-module>
+        <property name="default-digest-algorithm" value="SHA-256"></property>
+      </security-service>
+      <transaction-service tx-log-dir="${com.sun.aas.instanceRoot}/logs"></transaction-service>
+      <network-config>
+        <protocols>
+          <protocol name="http-listener-1">
+            <http default-virtual-server="server" max-connections="250">
+              <file-cache></file-cache>
+            </http>
+          </protocol>
+        </protocols>
+        <network-listeners>
+          <network-listener port="8080" protocol="http-listener-1" transport="tcp" name="http-listener-1" thread-pool="http-thread-pool"></network-listener>
+        </network-listeners>
+        <transports>
+          <transport name="tcp"></transport>
+        </transports>
+      </network-config>
+      <thread-pools>
+        <thread-pool max-thread-pool-size="50" name="admin-thread-pool" max-queue-size="256"></thread-pool>
+        <thread-pool name="http-thread-pool"></thread-pool>
+        <thread-pool max-thread-pool-size="200" name="thread-pool-1"></thread-pool>
+      </thread-pools>
+      <monitoring-service>
+        <module-monitoring-levels></module-monitoring-levels>
+      </monitoring-service>
+      <group-management-service>
+        <failure-detection></failure-detection>
+      </group-management-service>
+    </config>
+  </configs>
+  <property name="administrative.domain.name" value="domain1"></property>
+  <load-balancers></load-balancers>
+  <lb-configs></lb-configs>
+  <clusters></clusters>
+</domain>
