@@ -1,0 +1,83 @@
+typologie des fonctionalités :
+
+Cf. Elimu Uses Cases
+
+Are missings use cases for a non authetified user
+There's too many users, don't make the confusion between user profil that grant user to applications fonctionality and user djob in the school.
+
+There's no inheritance for Users? -> need sophisticated role based system? a fonctionality is own by a group then a user is part of many groups so have many fonctionnality?
+this if there's one view for all user -> when a user is authenticated his profil is returned then the UI adapte to user priviledges..(fields hiddens..etc)
+
+Or we can do one view per Role ...adding role will generate new developpement
+
+Utilisateurs stockés dans un LDAP? en base? -> JNDI?
+
+Student :
+  - Consulter cours
+  - Consulter plannings
+  - Rendre exercice
+  - Faire observation sur un eleve
+  - Consulter notes
+  - Evaluer prof
+  - Consulter bulletin
+  - Evaluer Ecole
+
+Parent (StudentID):
+  - Consulter/telecharger fars de sco
+  - Consulter bulletins
+  - Consulter discipline
+  - Evaluer ecole
+  - Consulter notes
+  
+Government :
+  - Evaluer ecole
+  - Consulter plannings
+  - Consulter taux ressites (stats per school, national, regional) -> include the notion of registering schools by regions//this induce another param cause regions have to be defined somwhere
+
+Secretaire :
+  - Inscrire etudiant
+  
+//pour moi la gestion d'une bibliothèque doit être un module complementaire (pluging) ainsi que la compta
+//on peu imaginer que c'est des greffons qui viendrons augmenter les capacités du logiciel
+//prévoir un réel socle technique
+
+Bibliothécaire :
+  - register student (different de l'inscription administtrative du secretaire)
+  - Preter livre
+  - Recuperer livre
+  
+//module a part  
+Infirmier :
+  - Consulter Etudiant (Monter dossier medical, mettre a jour dossier etc..)
+ 
+//module a part : necessite une vrai réflexion sur les uses cases
+//chaque greffon génère un model supplementaire -> voir comment gérer l'ajout d'unn nouveau greffon au niveau db
+Comptable :
+  - gérer finance
+  - sortir bilan de comptabilité
+  
+Surveillant :
+  - gérer matériel
+  - sanctionner étudiant
+  - controler les étudiants??
+  - faire observation sur étudiant
+  
+
+Directeur :
+  - Evaluer enseignant
+  - faire observation sur etudiant
+  - établir bulletin
+  - élaborer emplois du temps
+  - controler personnel
+  - convoquer parent
+  - recruter personnel
+  
+Enseignant :
+  - Evaluer ecole
+  - Consulter note
+  - Rendre un cours
+  - Faire une observation sur un éleve
+  - Rendre exercices
+  - Programmer examen (Gestion des salles d'exament??necessite aussi un recensseent des salles, les planning doivent indiquer les salles de cours)
+  - Inscrire,Modifier, Suprimmer notes
+  
