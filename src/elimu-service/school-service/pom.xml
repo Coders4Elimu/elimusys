@@ -207,11 +207,17 @@
                 </exclusion>
             </exclusions>
         </dependency>
+        <!--dependency>
+            <groupId>com.sun.jersey.jersey-test-framework</groupId>
+            <artifactId>jersey-test-framework-embedded-glassfish</artifactId>
+            <version>1.11</version>
+            <scope>test</scope>
+        </dependency-->
         <dependency>
-            <groupId>javax</groupId>
-            <artifactId>javaee-web-api</artifactId>
-            <version>6.0</version>
-            <scope>provided</scope>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-test-framework</artifactId> 
+            <version>1.1.4</version>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

@@ -28,7 +28,7 @@ public abstract class AbstractJpaDAO<T> implements DAO<T> {
     
     @Override
     public void update(T entity) {
-        getEntityManager().merge(this);
+        getEntityManager().merge(entity);
     }
 
     @Override

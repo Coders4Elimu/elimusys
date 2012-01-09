@@ -1,25 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.coders4africa</groupId>
-  <artifactId>elimusys</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
-  <name>elimusys</name>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.coders4africa</groupId>
+    <artifactId>elimusys</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>elimusys</name>
   
-   <developers>
+    <scm>
+        <connection>scm:git:git://github.com/martialsomda/elimusys.git</connection>
+        <developerConnection>scm:git:git@github.com:martialsomda/elimusys.git</developerConnection>
+        <url>https://martialsomda@github.com/martialsomda/elimusys.git</url>
+    </scm>
+        
+    <developers>
         <developer>
             <id>martialsomda</id>
             <name>Martial SOMDA</name>
             <email>martialsomda@gmail.com</email>
-            <organization>Capgemini</organization>
+            <organization></organization>
         </developer>
-   </developers>
-   <description>Elimu is an open source school management system</description>
-  <modules>
-    <module>elimu-framework/elimu-test</module>
-    <module>elimu-framework/elimu-core</module>
-    <module>elimu-framework/modules/elimu-school</module>
-    <module>elimu-service/school-service</module>
-  </modules>
+    </developers>
+    <description>Elimu is an open source school management system</description>
+    <modules>
+        <module>elimu-framework/elimu-test</module>
+        <module>elimu-framework/elimu-core</module>
+        <module>elimu-framework/modules/elimu-school</module>
+        <module>elimu-service/school-service</module>
+    </modules>
 </project>

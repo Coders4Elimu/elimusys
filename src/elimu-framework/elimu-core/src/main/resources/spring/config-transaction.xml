@@ -26,13 +26,15 @@
     <jee:jndi-lookup id="dataSource" jndi-name="jdbc/elimu" />
     <!--jee:jndi-lookup id="entityManagerFactory" jndi-name="persistence/elimusys-pu" />
     <tx:jta-transaction-manager /-->
-    
-    <bean id="persistenceUnitManager" class="org.springframework.orm.jpa.persistenceunit.DefaultPersistenceUnitManager">
-        <property name="persistenceXmlLocations">
+    <tx:annotation-driven transaction-manager="txManager" />
+
+    <bean id="persistenceUnitManager" class="org.coders4africa.elimu.spring.jpa.MultiConfigAwarePersistenceUnitManager">
+        <!-- this is the defaults locations used by spring -->
+        <!--property name="persistenceXmlLocations ">
             <list>
                 <value>classpath*:META-INF/persistence.xml</value>
             </list>
-        </property>
+        </property-->
         <property name="defaultDataSource" ref="dataSource"/>
     </bean>
 
@@ -64,19 +66,21 @@
     </bean>
     
     <aop:config>
-        <aop:pointcut id="serviceMethods" expression="execution(* service.*Service.*(..))"/>
+        <aop:pointcut id="serviceMethods" expression="bean(*Service)"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
 
     <tx:advice id="txAdvice" transaction-manager="txManager">
         <tx:attributes>
-            <tx:method name="save*" propagation="REQUIRED"/>
-            <tx:method name="update*" propagation="REQUIRED"/>
+            <tx:method name="create*" propagation="REQUIRED"/>
+            <tx:method name="edit*" propagation="REQUIRED"/>
+            <tx:method name="remove*" propagation="SUPPORTS" read-only="true"/>
             <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
-            <tx:method name="get*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="*" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
-
+    
+    
     <bean
      class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
  

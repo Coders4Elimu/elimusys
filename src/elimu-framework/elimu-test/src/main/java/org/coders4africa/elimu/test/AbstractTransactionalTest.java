@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.simple.SimpleJdbcTemplate;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.transaction.TransactionConfiguration;
-import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,11 +17,11 @@ import org.springframework.transaction.annotation.Transactional;
  *
  * @author MSOMDA
  */
-@TestExecutionListeners( { TransactionalTestExecutionListener.class })
+@TestExecutionListeners( { TransactionalDBUnitTestExecutionListener.class })
 @ContextConfiguration(locations={
     ConfigFilesLocator.TEST_TRANSACTION})
-@TransactionConfiguration(transactionManager="txManager",defaultRollback=true)
 @Transactional
+@TransactionConfiguration(transactionManager="txManager",defaultRollback=true)
 public class AbstractTransactionalTest extends AbstractTest{
     
     protected SimpleJdbcTemplate jdbcTemplate;
