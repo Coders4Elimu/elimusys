@@ -9,9 +9,17 @@
         <link rel="stylesheet" href="test-resbeans.css" type="text/css"/>
         <link rel="stylesheet" href="css_master-all.css" type="text/css"/>
         <script type="text/javascript">
+            function getServerHostName(){ 
+                var url = window.location.href; 
+                url = url.replace("http://", "");  
+                var urlExplode = url.split("/"); 
+                var serverName = urlExplode[0]; 
+                serverName = 'http://'+serverName; 
+                return serverName; 
+            } 
             //___ BASE_URL ___ will get replaced by the base url of application
             //whose resource beans needs to be tested For eg:- http://localhost:8080/SimpleServlet/
-            var baseURL = "http://localhost:8080/elimu-school-service/||Jersey Spring Servlet||/restservices/*";
+            var baseURL = getServerHostName() + "/elimu-school-service/||Jersey Spring Servlet||/restservices/*";
         </script>
         <script type="text/javascript" src="test-resbeans.js"></script>
     </head>

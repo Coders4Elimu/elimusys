@@ -3,8 +3,6 @@
   <persistence-unit name="elimusys-pu" transaction-type="JTA">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <jta-data-source>jdbc/elimu</jta-data-source>
-    <class>org.coders4africa.elimu.model.Address</class>
-    <class>org.coders4africa.elimu.model.Person</class>
     <class>org.coders4africa.elimu.school.model.Employee</class>
     <class>org.coders4africa.elimu.school.model.School</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>

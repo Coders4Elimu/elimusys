@@ -28,13 +28,12 @@
     <tx:jta-transaction-manager /-->
     <tx:annotation-driven transaction-manager="txManager" />
 
-    <bean id="persistenceUnitManager" class="org.coders4africa.elimu.spring.jpa.MultiConfigAwarePersistenceUnitManager">
-        <!-- this is the defaults locations used by spring -->
-        <!--property name="persistenceXmlLocations ">
+    <bean id="persistenceUnitManager" class="org.coders4africa.elimu.spring.jpa.ModularPersistenceUnitManager">
+        <property name="persistenceXmlLocations">
             <list>
                 <value>classpath*:META-INF/persistence.xml</value>
             </list>
-        </property-->
+        </property>
         <property name="defaultDataSource" ref="dataSource"/>
     </bean>
 
@@ -79,8 +78,7 @@
             <tx:method name="*" propagation="REQUIRED"/>
         </tx:attributes>
     </tx:advice>
-    
-    
+
     <bean
      class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
  

@@ -30,13 +30,26 @@
         <domain.username>admin</domain.username>
         <test.int.skip>false</test.int.skip>
     </properties>
-    
+
     <build>
         <finalName>school-service</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.11</version>
+                <configuration>
+                    <classpathDependencyExcludes>
+                        <!-- exclude code absent api -->
+                        <classpathDependencyExclude>javax:javaee-api</classpathDependencyExclude>
+                        <classpathDependencyExclude>javax:javaee-web-api</classpathDependencyExclude>
+                    </classpathDependencyExcludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
                 <inherited>true</inherited>
                 <configuration>
                     <source>1.6</source>
@@ -59,7 +72,7 @@
                             <Extension-Name>${project.artifactId}</Extension-Name>
                         </manifestEntries>
                     </archive>
-                    <webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml>
+                    <!--webXml>${basedir}/src/main/webapp/WEB-INF/web.xml</webXml-->
                 </configuration>
             </plugin> 
             <plugin>
@@ -76,7 +89,7 @@
                 </configuration>
                 <executions>
                     <execution>
-                        <phase>install</phase>
+                        <phase>deploy</phase>
                         <goals>
                             <goal>run</goal>
                         </goals>
@@ -167,6 +180,12 @@
             <groupId>org.coders4africa</groupId>
             <artifactId>elimu-school</artifactId>
             <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>javaee-api</artifactId>
+                    <groupId>javax</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
@@ -207,17 +226,23 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <!--dependency>
+        <dependency>
             <groupId>com.sun.jersey.jersey-test-framework</groupId>
             <artifactId>jersey-test-framework-embedded-glassfish</artifactId>
             <version>1.11</version>
             <scope>test</scope>
-        </dependency-->
-        <dependency>
+        </dependency>
+        <!--dependency>
             <groupId>com.sun.jersey</groupId>
             <artifactId>jersey-test-framework</artifactId> 
             <version>1.1.4</version>
             <scope>test</scope>
-        </dependency>
+        </dependency-->
+        <!--dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-client</artifactId>
+            <version>1.9.1</version>
+            <scope>test</scope>
+        </dependency-->
     </dependencies>
 </project>
