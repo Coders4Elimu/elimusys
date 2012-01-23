@@ -10,7 +10,7 @@ import java.util.List;
  *
  * @author MSOMDA
  */
-public interface DAO<T> {
+public interface GenericDAO<T> {
     
     void save(T entity);
     void update(T entity);
@@ -18,4 +18,5 @@ public interface DAO<T> {
     T findById(Object id);
     List<T> findAll();
     int count();
+    void flush();
 }

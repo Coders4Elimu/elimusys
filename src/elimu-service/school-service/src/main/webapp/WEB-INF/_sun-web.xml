@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<!DOCTYPE sun-web-app PUBLIC "-//Sun Microsystems, Inc.//DTD GlassFish Application Server 3.0 Servlet 3.0//EN" "http://www.sun.com/software/appserver/dtds/sun-web-app_3_0-0.dtd">
+<!--
+    Document   : sun-web.xml
+    Created on : 11 janvier 2012, 03:13
+    Author     : MSOMDA
+    Description:
+        Purpose of the document follows.
+-->
+
+<sun-web-app>
+    <!--  ack for running it into EmbeddedGlassfishServer  -->
+    <context-root>/elimu-school-service</context-root>
+    <resource-ref>
+        <res-ref-name>jdbc/elimu</res-ref-name>
+        <mapped-name>jdbc/_default</mapped-name>
+        <res-type>java.sql.DataSource</res-type>
+        <injection-target>
+            <injection-target-name>jdbc/elimu</injection-target-name>
+        </injection-target>
+    </resource-ref>
+    <class-loader delegate="true"/>
+</sun-web-app>

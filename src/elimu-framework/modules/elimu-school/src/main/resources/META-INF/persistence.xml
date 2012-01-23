@@ -5,9 +5,8 @@
     <jta-data-source>jdbc/elimu</jta-data-source>
     <class>org.coders4africa.elimu.school.model.Employee</class>
     <class>org.coders4africa.elimu.school.model.School</class>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <exclude-unlisted-classes />
     <properties>
-      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
     </properties>
   </persistence-unit>
 </persistence>

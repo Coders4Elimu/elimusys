@@ -15,12 +15,14 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import org.coders4africa.elimu.model.dao.GenericDAO;
 import org.coders4africa.elimu.school.model.School;
-import org.coders4africa.elimu.school.model.dao.jpa.SchoolJpaDAO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -29,12 +31,13 @@ import org.springframework.stereotype.Service;
 @Path("/schools")
 @Service
 @Scope("request")
+@Transactional(propagation= Propagation.REQUIRED)
 public class SchoolService {
     
     private Logger logger = LoggerFactory.getLogger(getClass());
     
     @Resource(name="schoolDAO")
-    private SchoolJpaDAO schoolDAO;
+    private GenericDAO schoolDAO;
     
     @POST
     @Consumes({
@@ -71,7 +74,7 @@ public class SchoolService {
     })
     public School find(@PathParam("id") Long id) {
         logger.info("Looking for a school");
-        return schoolDAO.findById(id);
+        return (School)schoolDAO.findById(id);
     }
 
     @GET

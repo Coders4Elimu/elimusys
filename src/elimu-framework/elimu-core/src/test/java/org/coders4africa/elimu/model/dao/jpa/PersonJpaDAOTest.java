@@ -8,6 +8,7 @@ import java.util.Calendar;
 import javax.annotation.Resource;
 import org.coders4africa.elimu.model.Address;
 import org.coders4africa.elimu.model.Person;
+import org.coders4africa.elimu.model.dao.GenericDAO;
 import org.coders4africa.elimu.model.enums.Gender;
 import org.coders4africa.elimu.model.enums.Title;
 import org.coders4africa.elimu.test.AbstractTransactionalTest;
@@ -28,7 +29,7 @@ import static org.junit.Assert.*;
 public class PersonJpaDAOTest extends AbstractTransactionalTest {
     
     @Resource(name="personDAO")
-    PersonJpaDAO dao;
+    GenericDAO dao;
     
     public PersonJpaDAOTest(){       
     }
@@ -72,7 +73,7 @@ public class PersonJpaDAOTest extends AbstractTransactionalTest {
         
         dao.save(person);
         
-        dao.getEntityManager().flush();
+        dao.flush();
         
         assertTrue("DB must contain one person", countTableRows("persons") == 1);
         assertTrue("DB must contain one address", countTableRows("addresses") == 1);

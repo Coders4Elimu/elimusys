@@ -38,7 +38,7 @@ import org.coders4africa.elimu.model.enums.Title;
 public class Person implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy=GenerationType.TABLE)
     @Column(name="personID", nullable=false)
     private Long id;
     @Enumerated(EnumType.STRING)

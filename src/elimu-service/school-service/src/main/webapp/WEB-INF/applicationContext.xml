@@ -21,9 +21,10 @@
        http://www.springframework.org/schema/tx/spring-tx-3.0.xsd">
 
     <!-- Scans within the base package of the application for @Components to configure as beans -->
-    <context:component-scan base-package="org.coders4africa.elimu"/>
-    <context:annotation-config />
-    <tx:annotation-driven transaction-manager="txManager"/>
-    <!--context:load-time-weaver/-->
+    <context:component-scan base-package="org.coders4africa.elimu.school.service"/>
+    
+    <bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="classpath:messages.properties" />
+    </bean>
     
 </beans>

@@ -6,6 +6,7 @@ package org.coders4africa.elimu.model.dao.jpa;
 
 import javax.annotation.Resource;
 import org.coders4africa.elimu.model.Address;
+import org.coders4africa.elimu.model.dao.GenericDAO;
 import org.coders4africa.elimu.test.AbstractTransactionalTest;
 import org.coders4africa.elimu.test.ConfigFilesLocator;
 import org.junit.After;
@@ -24,7 +25,7 @@ import static org.junit.Assert.*;
 public class AddressJpaDAOTest extends AbstractTransactionalTest {
     
     @Resource(name="addressDAO")
-    AddressJpaDAO dao;
+    GenericDAO dao;
     
     public AddressJpaDAOTest() {
     }
@@ -58,8 +59,8 @@ public class AddressJpaDAOTest extends AbstractTransactionalTest {
         
         dao.save(address);
         
-        dao.getEntityManager().flush();
-        
+        dao.flush();
+
         assertTrue("DB must contains one address", countTableRows("addresses") == 1);
         
     }

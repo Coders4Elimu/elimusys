@@ -29,7 +29,7 @@ import org.coders4africa.elimu.model.Address;
 public class School implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String fax;
@@ -39,7 +39,6 @@ public class School implements Serializable {
         CascadeType.REMOVE},fetch= FetchType.LAZY)
     @JoinColumn(name="addressID",unique=true,nullable=false)
     private Address address;
-
 
     public Address getAddress() {
         return address;

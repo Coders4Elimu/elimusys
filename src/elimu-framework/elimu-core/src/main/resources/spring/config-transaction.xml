@@ -26,7 +26,6 @@
     <jee:jndi-lookup id="dataSource" jndi-name="jdbc/elimu" />
     <!--jee:jndi-lookup id="entityManagerFactory" jndi-name="persistence/elimusys-pu" />
     <tx:jta-transaction-manager /-->
-    <tx:annotation-driven transaction-manager="txManager" />
 
     <bean id="persistenceUnitManager" class="org.coders4africa.elimu.spring.jpa.ModularPersistenceUnitManager">
         <property name="persistenceXmlLocations">
@@ -37,12 +36,14 @@
         <property name="defaultDataSource" ref="dataSource"/>
     </bean>
 
+    <bean id="jpaDialect" class="org.springframework.orm.jpa.vendor.HibernateJpaDialect"/>
+
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+                <property name="databasePlatform" value="org.hibernate.dialect.MySQL5Dialect"/>
                 <property name="database" value="MYSQL"/>
                 <property name="showSql" value="true"/>
-                <property name="generateDdl" value="true"/>
             </bean>
         </property>
         <property name="jpaProperties">
@@ -51,20 +52,20 @@
                 <!--prop key="hibernate.transaction.factory_class">org.hibernate.transaction.JTATransactionFactory</prop-->
                 <!-- CMT -->
                 <prop key="hibernate.transaction.manager_lookup_class">org.hibernate.transaction.SunONETransactionManagerLookup</prop>
+                <prop key="hibernate.connection.release_mode">after_statement</prop>
+                <prop key="hibernate.format_sql">true</prop>
             </props>
         </property>
         <property name="persistenceUnitManager" ref="persistenceUnitManager"/>
         <property name="persistenceUnitName" value="elimusys-pu"/>
-        <property name="loadTimeWeaver">
-            <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
-        </property>
+        <property name="jpaDialect" ref="jpaDialect"/>
     </bean>     
     
     <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
     
-    <aop:config>
+    <!--aop:config>
         <aop:pointcut id="serviceMethods" expression="bean(*Service)"/>
         <aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods"/>
     </aop:config>
@@ -73,11 +74,10 @@
         <tx:attributes>
             <tx:method name="create*" propagation="REQUIRED"/>
             <tx:method name="edit*" propagation="REQUIRED"/>
-            <tx:method name="remove*" propagation="SUPPORTS" read-only="true"/>
+            <tx:method name="remove*" propagation="SUPPORTS"/>
             <tx:method name="find*" propagation="SUPPORTS" read-only="true"/>
-            <tx:method name="*" propagation="REQUIRED"/>
         </tx:attributes>
-    </tx:advice>
+    </tx:advice-->
 
     <bean
      class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />

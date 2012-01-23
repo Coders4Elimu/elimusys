@@ -7,9 +7,13 @@ package org.coders4africa.elimu.school.model.dao.jpa;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.Resource;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import org.springframework.test.context.ContextConfiguration;
 import org.coders4africa.elimu.test.ConfigFilesLocator;
 import org.coders4africa.elimu.model.Address;
+import org.coders4africa.elimu.model.dao.GenericDAO;
 import org.coders4africa.elimu.school.model.School;
 import org.coders4africa.elimu.test.AbstractTransactionalTest;
 import org.coders4africa.elimu.test.DataSetLocation;
@@ -28,8 +32,11 @@ import static org.junit.Assert.*;
 public class SchoolJpaDAOTest extends AbstractTransactionalTest{
     
     @Resource(name="schoolDAO")
-    SchoolJpaDAO dao;
-            
+    GenericDAO dao;
+    
+    @PersistenceContext(type= PersistenceContextType.TRANSACTION)
+    private EntityManager entityManager;
+    
     public SchoolJpaDAOTest() {
     }
 
@@ -70,7 +77,7 @@ public class SchoolJpaDAOTest extends AbstractTransactionalTest{
         
         dao.save(school);
         
-        dao.getEntityManager().flush();
+        dao.flush();
         
         assertTrue("DB must contain one school", countTableRows("schools") == 1);
         assertTrue("DB must contain one address", countTableRows("addresses") == 1);
@@ -84,11 +91,11 @@ public class SchoolJpaDAOTest extends AbstractTransactionalTest{
         assertTrue("DB must contain one school", countTableRows("schools") == 1);
         assertTrue("DB must contain one address", countTableRows("addresses") == 1);
         
-        School school = dao.getEntityManager().find(School.class, Long.valueOf("1"));
+        School school = entityManager.find(School.class, Long.valueOf("1"));
         
         dao.delete(school);
         
-        dao.getEntityManager().flush();
+        dao.flush();
         
         assertTrue("DB must contain no school", countTableRows("schools") == 0);
         assertTrue("DB must contain no address", countTableRows("addresses") == 0);
@@ -101,7 +108,7 @@ public class SchoolJpaDAOTest extends AbstractTransactionalTest{
         assertTrue("DB must contain one school", countTableRows("schools") == 1);
         assertTrue("DB must contain one address", countTableRows("addresses") == 1);
         
-        School school = dao.getEntityManager().find(School.class, Long.valueOf("1"));
+        School school = entityManager.find(School.class, Long.valueOf("1"));
         
         String newWebSite = "www.toto.com";
         String newStreet = "98 new street";
@@ -114,7 +121,7 @@ public class SchoolJpaDAOTest extends AbstractTransactionalTest{
         
         dao.update(school);
         
-        dao.getEntityManager().flush();
+        dao.flush();
         
         Map resultMap = jdbcTemplate.queryForMap(
                 "select s.website, a.street from schools s, addresses a "

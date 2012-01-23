@@ -6,15 +6,19 @@ package org.coders4africa.elimu.model.dao.jpa;
 
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceContextType;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import org.coders4africa.elimu.model.dao.DAO;
+import org.coders4africa.elimu.model.dao.GenericDAO;
 /**
  *
  * @author MSOMDA
  */
-public abstract class AbstractJpaDAO<T> implements DAO<T> {
+public abstract class AbstractJpaDAO<T> implements GenericDAO<T> {
 
+    @PersistenceContext(type= PersistenceContextType.TRANSACTION)
+    private EntityManager entityManager;
     private Class<T> entityClass;
 
     public AbstractJpaDAO(Class<T> entityClass) {
@@ -23,39 +27,49 @@ public abstract class AbstractJpaDAO<T> implements DAO<T> {
     
     @Override
     public void save(T entity) {
-        getEntityManager().persist(entity);
+        entityManager.persist(entity);
     }
     
     @Override
     public void update(T entity) {
-        getEntityManager().merge(entity);
+        entityManager.merge(entity);
     }
 
     @Override
     public void delete(T entity) {
-        getEntityManager().remove(getEntityManager().merge(entity));
+        entityManager.remove(
+                entityManager.contains(entity)? entity : 
+                entityManager.merge(entity)
+                );
     }
 
     @Override
     public T findById(Object id) {
-        return getEntityManager().find(entityClass, id);
+        return entityManager.find(entityClass, id);
     }
 
     @Override
     public List<T> findAll() {
-        CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+        CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
         cq.select(cq.from(entityClass));
-        return getEntityManager().createQuery(cq).getResultList();
+        return entityManager.createQuery(cq).getResultList();
     }
 
     @Override
     public int count() {
-        CriteriaQuery cq = getEntityManager().getCriteriaBuilder().createQuery();
+        CriteriaQuery cq = entityManager.getCriteriaBuilder().createQuery();
         Root<T> rt = cq.from(entityClass);
-        cq.select(getEntityManager().getCriteriaBuilder().count(rt));
-        javax.persistence.Query q = getEntityManager().createQuery(cq);
+        cq.select(entityManager.getCriteriaBuilder().count(rt));
+        javax.persistence.Query q = entityManager.createQuery(cq);
         return ((Long) q.getSingleResult()).intValue();
     }
     
-    protected abstract EntityManager getEntityManager();
+    @Override
+    public void flush() {
+         entityManager.flush();
+    }
+    
+    public EntityManager getEntityManager() {
+        return entityManager;
+    } 
 }
