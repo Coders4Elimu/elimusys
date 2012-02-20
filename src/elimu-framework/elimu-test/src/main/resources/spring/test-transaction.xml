@@ -30,6 +30,7 @@
     
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
         <property name="dataSource" ref="datasource" />
+        <property name="persistenceXmlLocation" value="META-INF/orm.xml" />
         <property name="jpaVendorAdapter">
             <bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
                 <property name="database" value="MYSQL"/>
@@ -37,7 +38,7 @@
                 <property name="generateDdl" value="true"/>
             </bean>
         </property>
-        <property name="persistenceUnitName" value="test-elimu-pu"/>
+        <property name="persistenceUnitName" value="elimusys-pu"/>
         <property name="loadTimeWeaver">
             <bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver" />
         </property>
@@ -47,7 +48,7 @@
         <property name="entityManagerFactory" ref="entityManagerFactory" />
     </bean>
 
-   <!-- Exception translation bean post processor -->
+    <!-- Exception translation bean post processor -->
     <bean
      class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
  

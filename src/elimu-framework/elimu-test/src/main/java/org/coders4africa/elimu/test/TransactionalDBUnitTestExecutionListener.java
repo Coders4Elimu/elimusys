@@ -10,7 +10,6 @@ import java.util.Locale;
 import javax.sql.DataSource;
 import org.dbunit.database.DatabaseConfig;
 import org.dbunit.database.DatabaseConnection;
-import org.dbunit.database.DatabaseDataSourceConnection;
 import org.dbunit.database.IDatabaseConnection;
 import org.dbunit.dataset.IDataSet;
 import org.dbunit.dataset.ReplacementDataSet;

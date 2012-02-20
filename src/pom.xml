@@ -18,14 +18,23 @@
             <id>martialsomda</id>
             <name>Martial SOMDA</name>
             <email>martialsomda@gmail.com</email>
-            <organization></organization>
+            <organization/>
         </developer>
     </developers>
     <description>Elimu is an open source school management system</description>
     <modules>
         <module>elimu-framework/elimu-test</module>
-        <module>elimu-framework/elimu-core</module>
-        <module>elimu-framework/modules/elimu-school</module>
-        <module>elimu-service/school-service</module>
-    </modules>
+        <module>elimu-framework/elimu-domain</module>
+        <module>elimu-service</module>
+        <module>elimu-webservice</module>
+        <module>elimu-ear</module>
+  </modules>
+  
+    <dependencies>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
+            <version>6.0</version>
+        </dependency>
+    </dependencies>
 </project>
