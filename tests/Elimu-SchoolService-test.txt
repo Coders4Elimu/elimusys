@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Example of XML file that describe a school (this can b used in the WS test GUI) -->
-<school name="Harvard"> 
+<school> 
 	<address> 
 		<celPhone>617.495.1551</celPhone> 
 		<city>Cambridge</city> 
@@ -12,6 +12,7 @@
 		<street>Massachusetts Hall</street> 
 		<zipCode>02138</zipCode> 
 	</address> 
+	<name>Harvard</name>
 	<fax>617.495.8821</fax> 
 	<website>www.harvard.edu</website> 
 </school>
