@@ -13,6 +13,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import org.coders4africa.elimu.domain.school.Employee;
 import org.coders4africa.elimu.service.school.EmployeeService;
 import org.slf4j.Logger;
@@ -40,8 +41,9 @@ public class EmployeeResource {
         MediaType.APPLICATION_XML, 
         MediaType.APPLICATION_JSON
     })
-    public void updateEmployeeInformation(Employee school) {
-        service.updateEmployeeInformation(school);
+    public Response updateEmployeeInformation(Employee employee) {
+        service.updateEmployeeInformation(employee);
+        return Response.ok().entity(employee).build();
     }
     
     @GET
