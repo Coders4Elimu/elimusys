@@ -51,7 +51,7 @@ public class BaseEntity implements Serializable {
      * </pre>
      * All subclasses must override these mothods :
      * <pre>
-     * @Override
+     *   @Override
      *   @XmlAttribute
      *   public Long getId() {
      *       return super.getId();
