@@ -2,7 +2,7 @@
 <application version="5" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd">
     <display-name>elimu-ear</display-name>
     <module>
-        <ejb>elimu-service-1.0-SNAPSHOT.jar</ejb>    
+        <ejb>elimu-ejb-1.0-SNAPSHOT.jar</ejb>    
     </module>
     <module>
         <web>    

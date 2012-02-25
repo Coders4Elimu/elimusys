@@ -5,7 +5,8 @@
     <artifactId>elimu-domain</artifactId>
     <packaging>jar</packaging>
     <name>elimu-domain</name>
-
+    <description>Elimu Domain Model (EJB 3.1)</description>
+    
     <parent>
         <artifactId>elimusys</artifactId>
         <groupId>org.coders4africa</groupId>

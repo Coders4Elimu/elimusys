@@ -5,7 +5,7 @@
     <jta-data-source>jdbc/elimu</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-        <!--property name="hibernate.hbm2ddl.auto" value="create-drop" /-->
+        <property name="hibernate.hbm2ddl.auto" value="create-drop" />
         <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
     </properties>
   </persistence-unit>

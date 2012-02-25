@@ -7,8 +7,8 @@ package org.coders4africa.elimu.service.school;
 import java.util.List;
 import org.coders4africa.elimu.domain.school.Employee;
 import org.coders4africa.elimu.domain.school.School;
-import org.coders4africa.elimu.service.jpa.EntityNotFoundException;
-import org.coders4africa.elimu.service.jpa.NotFoundException;
+import org.coders4africa.elimu.service.exception.EntityNotFoundException;
+import org.coders4africa.elimu.service.exception.NotFoundException;
 
 /**
  *

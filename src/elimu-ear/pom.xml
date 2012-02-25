@@ -5,6 +5,7 @@
   <artifactId>elimu-ear</artifactId>
   <packaging>ear</packaging>
   <name>elimu-ear</name>
+  <description>Elimu EAR Packaging</description>
   
   <parent>
     <artifactId>elimusys</artifactId>
@@ -32,7 +33,7 @@
                     <modules>
                         <ejbModule>
                             <groupId>org.coders4africa</groupId>
-                            <artifactId>elimu-service</artifactId>
+                            <artifactId>elimu-ejb</artifactId>
                         </ejbModule>
                     </modules>
                     <archive>
@@ -56,15 +57,9 @@
       <version>${project.version}</version>
       <type>war</type>
     </dependency>
-    <!--dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>testwebapp</artifactId>
-      <version>${project.version}</version>
-      <type>war</type>
-    </dependency-->
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>elimu-service</artifactId>
+      <artifactId>elimu-ejb</artifactId>
       <version>${project.version}</version>
       <type>ejb</type>
     </dependency>    

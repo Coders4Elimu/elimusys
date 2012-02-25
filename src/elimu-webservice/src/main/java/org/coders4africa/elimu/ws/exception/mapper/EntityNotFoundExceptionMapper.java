@@ -8,8 +8,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
-import org.coders4africa.elimu.service.jpa.EntityNotFoundException;
-import org.coders4africa.elimu.service.jpa.NotFoundException;
+import org.coders4africa.elimu.service.exception.EntityNotFoundException;
+import org.coders4africa.elimu.service.exception.NotFoundException;
 
 /**
  * This mapper will be use by jersey framework to translate the

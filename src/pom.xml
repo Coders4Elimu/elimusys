@@ -28,6 +28,7 @@
         <module>elimu-service</module>
         <module>elimu-webservice</module>
         <module>elimu-ear</module>
+    <module>elimu-ejb</module>
   </modules>
   
     <dependencies>

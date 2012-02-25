@@ -5,7 +5,8 @@
 package org.coders4africa.elimu.ws.school;
 
 import java.util.List;
-import javax.inject.Inject;
+import javax.ejb.EJB;
+import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -18,21 +19,18 @@ import org.coders4africa.elimu.domain.school.Employee;
 import org.coders4africa.elimu.service.school.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 /**
  *
  * @author MSOMDA
  */
 @Path("/employees")
-@Scope("request")
-@Component
+@Stateless
 public class EmployeeResource {
     
     private Logger logger = LoggerFactory.getLogger(getClass());
     
-    @Inject
+    @EJB
     private EmployeeService service;
 
     
