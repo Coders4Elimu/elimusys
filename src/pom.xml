@@ -27,6 +27,67 @@
             <organization/>
         </developer>
     </developers>
+    
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>license-maven-plugin</artifactId>
+                <version>1.0</version>
+                <inherited>true</inherited>
+                <configuration>
+                    <verbose>true</verbose>
+                    <addSvnKeyWords>false</addSvnKeyWords>
+                    <licenseName>gpl_v3</licenseName>
+                    <encoding>ISO-8859-1</encoding>
+                    <projectName>Elimu System</projectName>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>update-project-license</id>
+                        <goals>
+                            <goal>update-project-license</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                        <configuration>                   
+                            <outputDirectory>${basedir}</outputDirectory>                       
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>update-file-header</id>
+                        <goals>
+                            <goal>update-file-header</goal>
+                        </goals>
+                        <phase>process-resources</phase>
+                        <configuration>                          
+                            <inceptionYear>2012</inceptionYear>
+                            <canUpdateCopyright>true</canUpdateCopyright>
+                            <clearAfterOperation>true</clearAfterOperation>
+                            <roots>
+                                <root1>**/src/**</root1>
+                            </roots>
+                            <includes>
+                                <include>*.java</include>
+                                <include>*.xml</include>
+                            </includes>
+                            <excludes>
+                                <exclude>${basedir}/LICENSE.txt</exclude>
+                                <exclude>**/src/test/resources/**</exclude>
+                                <exclude>**/src/webapp/images/**</exclude>
+                                <exclude>**/*.jpg</exclude>
+                                <exclude>**/*.png</exclude>
+                                <exclude>**/*.gif</exclude>
+                                <exclude>**/css_master-all.css</exclude>
+                                <exclude>**/test-resbeans.css</exclude>
+                                <exclude>**/test-resbeans.js</exclude>
+                                <exclude>**/test-services.html</exclude>
+                            </excludes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
   
     <modules>
         <module>elimu-framework/elimu-test</module>
