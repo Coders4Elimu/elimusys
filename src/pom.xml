@@ -6,13 +6,19 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>elimusys</name>
+    <description>Elimu is an open source school management system</description>
   
     <scm>
         <connection>scm:git:git://github.com/martialsomda/elimusys.git</connection>
         <developerConnection>scm:git:git@github.com:martialsomda/elimusys.git</developerConnection>
         <url>https://martialsomda@github.com/martialsomda/elimusys.git</url>
     </scm>
-        
+    
+    <organization>
+        <name>Coders4Africa</name>
+        <url>http://www.coders4africa.org/</url>
+    </organization>
+    
     <developers>
         <developer>
             <id>martialsomda</id>
@@ -21,16 +27,16 @@
             <organization/>
         </developer>
     </developers>
-    <description>Elimu is an open source school management system</description>
+  
     <modules>
         <module>elimu-framework/elimu-test</module>
         <module>elimu-framework/elimu-domain</module>
         <module>elimu-service</module>
         <module>elimu-webservice</module>
+        <module>elimu-ejb</module>
         <module>elimu-ear</module>
-    <module>elimu-ejb</module>
-  </modules>
-  
+    </modules>
+ 
     <dependencies>
         <dependency>
             <groupId>javax</groupId>

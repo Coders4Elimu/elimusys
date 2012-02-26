@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.coders4africa.elimu.domain.school;
 
 import javax.persistence.CascadeType;
@@ -14,7 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,8 +20,10 @@ import org.coders4africa.elimu.domain.school.enums.Function;
 import org.coders4africa.elimu.domain.school.enums.PersonType;
 
 /**
- *
- * @author MSOMDA
+ * School's Employee entity.
+ * 
+ * @author Martial SOMDA
+ * @since 1.0
  */
 @Entity
 @Table(name = "schoolemployees")
@@ -42,11 +40,11 @@ public class Employee extends Person {
     private static final long serialVersionUID = 1L;
     public static final String QUERY_COUNT_SHOOL_EMPLOYEES = "queryCountSchoolEmployees";
     public static final String QUERY_SHOOL_EMPLOYEES = "querySchoolEmployees";
+    
     @Enumerated(EnumType.STRING)
     private Function function;
     @ManyToOne(targetEntity = School.class, cascade = {
-        CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH,
-        CascadeType.REMOVE}, fetch = FetchType.LAZY)
+        CascadeType.PERSIST}, fetch = FetchType.LAZY)
     @JoinColumn(name = "schoolID", nullable = false)
     private School school;
 

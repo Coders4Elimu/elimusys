@@ -1,13 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.coders4africa.elimu.ws.school;
 
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -16,19 +14,19 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import org.coders4africa.elimu.domain.school.Employee;
+import org.coders4africa.elimu.service.exception.EntityNotFoundException;
+import org.coders4africa.elimu.service.exception.NotFoundException;
 import org.coders4africa.elimu.service.school.EmployeeService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author MSOMDA
+ * This class exposes {@link EmployeeService} as a RestFull web service.
+ * 
+ * @author Martial SOMDA
+ * @since 1.0
  */
 @Path("/employees")
 @Stateless
 public class EmployeeResource {
-    
-    private Logger logger = LoggerFactory.getLogger(getClass());
     
     @EJB
     private EmployeeService service;
@@ -50,7 +48,7 @@ public class EmployeeResource {
         MediaType.APPLICATION_XML, 
         MediaType.APPLICATION_JSON
     })
-    public Employee findSchool(@PathParam("id") Long id) {
+    public Employee findEmployee(@PathParam("id") Long id) {
         return service.findEmployee(id);
     }
     
@@ -59,8 +57,15 @@ public class EmployeeResource {
         MediaType.APPLICATION_XML, 
         MediaType.APPLICATION_JSON
     })
-    public List<Employee> retrieveAllSchools() {
+    public List<Employee> retrieveAllEmployees() {
         return service.retrieveAllEmployees();
+    }
+    
+    @DELETE
+    @Path("{id}")
+    public Response deleteEmployee(@PathParam("id") Long id) throws NotFoundException, EntityNotFoundException {
+        service.deleteEmployee(id);
+        return Response.ok().build();
     }
     
     @GET
@@ -69,5 +74,4 @@ public class EmployeeResource {
     public String count() {
         return service.countEmployees();
     }
-
 }

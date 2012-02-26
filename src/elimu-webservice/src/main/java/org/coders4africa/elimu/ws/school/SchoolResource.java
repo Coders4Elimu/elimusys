@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.coders4africa.elimu.ws.school;
 
 import java.net.URI;
@@ -22,20 +19,19 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.coders4africa.elimu.domain.school.Employee;
 import org.coders4africa.elimu.domain.school.School;
+import org.coders4africa.elimu.service.exception.EntityNotFoundException;
 import org.coders4africa.elimu.service.exception.NotFoundException;
 import org.coders4africa.elimu.service.school.SchoolService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author MSOMDA
+ * This class exposes {@link SchoolService} as a RestFull web service.
+ * 
+ * @author Martial SOMDA
+ * @since 1.0
  */
 @Path("/schools")
 @Stateless
 public class SchoolResource {
-    
-    private Logger logger = LoggerFactory.getLogger(getClass());
     
     @EJB
     private SchoolService service;
@@ -127,6 +123,13 @@ public class SchoolResource {
         }
         
         return Response.noContent().build();
+    }
+    
+    @DELETE
+    @Path("{id}/employees/{employeeId}")
+    public Response unregisterEmployee(@PathParam("id") Long id, @PathParam("employeeId") Long employeeId) throws NotFoundException, EntityNotFoundException {
+        service.unregisterEmployee(id,employeeId);
+        return Response.ok().build();
     }
 
     @GET

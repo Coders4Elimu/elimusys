@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.coders4africa.elimu.domain;
 
 import javax.persistence.GenerationType;
@@ -15,14 +12,15 @@ import javax.xml.bind.annotation.XmlTransient;
 import static org.coders4africa.elimu.jpa.JPAUtils.implementationClass;
 
 /**
- * This class is the base class for all Elimu entities.
+ * This class is the base class for all Elimu entities.<br/>
  * This class introduce a hierarchy that permit to apply
- * common rules on elimu entities regardless of their real type.
- * For exemple with that we can simlpy search an entity based on
- * the entity id. We can check at run time the real entity type to
- * find the table to search into.
+ * common rules on elimu entities regardless of their real type.<br/>
+ * For exemple with that we can simply search an entity based on
+ * a identifier. The real entity type to will be determined at run-time
+ * to find the table to search into.
  * 
- * @author MSOMDA
+ * @author Martial SOMDA
+ * @since 1.0
  */
 @MappedSuperclass
 public class BaseEntity implements Serializable {
@@ -49,18 +47,20 @@ public class BaseEntity implements Serializable {
      * <pre>
      *  Class has two properties of the same name "id"
      * </pre>
-     * All subclasses must override these mothods :
+     * To resolve it all subclasses must override these mothods :
      * <pre>
-     *   @Override
-     *   @XmlAttribute
+     * {@code 
+     *   &#64;Override
+     *   &#64;XmlAttribute
      *   public Long getId() {
      *       return super.getId();
      *   }
      *
-     *   @Override
+     *   &#64;Override
      *   public void setId(Long id) {
      *       super.setId(id);
      *   }
+     * }
      * </pre>
      */
     @XmlTransient

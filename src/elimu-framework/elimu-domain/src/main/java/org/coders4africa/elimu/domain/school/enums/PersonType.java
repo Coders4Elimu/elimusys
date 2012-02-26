@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.coders4africa.elimu.domain.school.enums;
 
 import java.io.Serializable;
@@ -9,8 +6,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- *
- * @author MSOMDA
+ * This class define contants to distinguish school actors.
+ * 
+ * @author Martial SOMDA
+ * @since 1.0
  */
 public class PersonType implements Serializable {
     

@@ -1,17 +1,13 @@
+
 package org.coders4africa.elimu.service.exception;
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 
 import org.coders4africa.elimu.domain.BaseEntity;
 
 /**
  * Base class for exceptions that refer to a {@link BaseEntity}.
  * 
- * @author MSOMDA
+ * @author Martial SOMDA
+ * @since 1.0
  */
 public class AbstractEntityException extends Exception {
     

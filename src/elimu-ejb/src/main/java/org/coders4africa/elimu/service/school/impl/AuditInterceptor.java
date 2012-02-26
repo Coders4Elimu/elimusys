@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.coders4africa.elimu.service.school.impl;
 
 import javax.interceptor.AroundInvoke;
@@ -10,8 +7,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author MSOMDA
+ * Intercepts calls to EJB implementations of Elimu services and logs 
+ * input parameters, time elapsed between start and end of calls returned values etc.
+ * 
+ * @author Martial SOMDA
+ * @since 1.0
  */
 public class AuditInterceptor {
 

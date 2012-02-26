@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.coders4africa.elimu.domain;
 
 import java.text.SimpleDateFormat;
@@ -22,11 +19,14 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.coders4africa.elimu.domain.enums.Gender;
 import org.coders4africa.elimu.domain.enums.Title;
+import org.coders4africa.elimu.domain.school.Employee;
 import org.coders4africa.elimu.domain.school.enums.PersonType;
 
 /**
- *
- * @author MSOMDA
+ * Person Entity.<br/>Base class for Elimu human actors
+ * @author Martial SOMDA
+ * @see Employee
+ * @since 1.0
  */
 @Entity
 @Table(name="persons")
@@ -109,7 +109,7 @@ public abstract class Person extends BaseEntity {
         this.firstName = firstName;
     }
 
-        /**
+     /**
      * Get the value of type
      *
      * @return the value of type

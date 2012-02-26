@@ -1,12 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.coders4africa.elimu.domain.school;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -22,8 +17,10 @@ import org.coders4africa.elimu.domain.Address;
 import org.coders4africa.elimu.domain.BaseEntity;
 
 /**
- *
- * @author MSOMDA
+ * School entity.
+ * 
+ * @author Martial SOMDA
+ * @since 1.0
  */
 @Entity
 @Table(name="schools")
@@ -43,7 +40,7 @@ public class School extends BaseEntity {
     @OneToMany(targetEntity=Employee.class,cascade={
         CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, 
         CascadeType.REMOVE},fetch= FetchType.LAZY,mappedBy="school")
-    private Set<Employee> employees;
+    private Set<Employee> employees = new HashSet<Employee>();
 
     @Override
     @XmlAttribute
@@ -78,10 +75,8 @@ public class School extends BaseEntity {
      * @param employee 
      */
     public synchronized void addEmployee(Employee employee){
-        if(employees == null){
-            employees = new HashSet<Employee>();
-        }
         employees.add(employee);
+        employee.setSchool(this);
     }
     
     /**
@@ -91,8 +86,9 @@ public class School extends BaseEntity {
      * @param employee 
      */
     public synchronized void removeEmployee(Employee employee){
-        if(employees != null && employees.contains(employee)){
+        if(employees.contains(employee)){
             employees.remove(employee);
+            employee.setSchool(null);
         }
     }
     

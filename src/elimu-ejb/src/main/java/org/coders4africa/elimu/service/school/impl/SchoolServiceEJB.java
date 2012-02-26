@@ -1,12 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.coders4africa.elimu.service.school.impl;
 
 import org.coders4africa.elimu.service.jpa.JPABaseDAO;
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
@@ -21,8 +17,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author MSOMDA
+ * EJB 3.1 implementation of {@link SchoolService}
+ * 
+ * @author Martial SOMDA
+ * @since 1.0
  */
 
 @Stateless
@@ -95,27 +93,29 @@ public class SchoolServiceEJB implements SchoolService {
             throw new NotFoundException("Could not find a shool with the given id='"+ schoolId +"'");
         }
         
-        employee.setSchool(school);
         school.addEmployee(employee);
-        employeeDAO.save(employee);  
+        schoolDAO.save(school);  
     }
     
     @Override
-    public void unregisterEmployee(Long employeeId)
+    public void unregisterEmployee(Long schoolId, Long employeeId)
             throws NotFoundException, EntityNotFoundException {
-        logger.info("About to unregister the employee  {}",employeeId);
+        logger.info("About to unregister the employee  {} from the school {}",employeeId, schoolId);
         Employee employee = employeeDAO.findById(employeeId);
         
         if(employee == null){
             throw new NotFoundException("Could not find a employee with the given id='"+ employeeId +"'");
         }
         
+        if(!employee.getSchool().getId().equals(schoolId)){
+            throw new NotFoundException("Currently knowned employee with the given id='"+ employeeId +"' "
+                    + "is not attached to the given school id='"+ schoolId +"' "
+                    + "but with school id='"+ employee.getSchool().getId() +"'");
+        }
         School school = schoolDAO.checkExists(employee.getSchool());
         
         school.removeEmployee(employee);
-        employee.setSchool(null);
         schoolDAO.update(school);
-        //employeeDAO.update(employee);
     }
     
     @Override

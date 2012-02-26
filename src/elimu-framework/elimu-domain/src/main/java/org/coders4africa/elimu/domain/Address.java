@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.coders4africa.elimu.domain;
 
 import javax.persistence.Entity;
@@ -10,8 +7,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- *
- * @author MSOMDA
+ * Address entity.
+ * 
+ * @author Martial SOMDA
+ * @since 1.0
  */
 @Entity
 @Table(name="addresses")

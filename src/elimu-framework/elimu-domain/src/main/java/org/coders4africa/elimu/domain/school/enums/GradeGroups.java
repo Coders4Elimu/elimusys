@@ -1,15 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.coders4africa.elimu.domain.school.enums;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
- *
- * @author MSOMDA
+ * Enumeation of Elimu supported grade groups
+ * 
+ * @author Martial SOMDA
+ * @since 1.0
  */
 public enum GradeGroups {
     

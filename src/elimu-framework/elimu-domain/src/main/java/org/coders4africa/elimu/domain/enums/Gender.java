@@ -1,12 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.coders4africa.elimu.domain.enums;
 
 /**
- *
- * @author MSOMDA
+ * Enumeration of Elimu supported Genders
+ * 
+ * @author Martial SOMDA
+ * @since 1.0
  */
 public enum Gender {
     

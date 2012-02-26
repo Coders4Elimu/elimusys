@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.coders4africa.elimu.ws.exception.mapper;
 
 import javax.ws.rs.core.MediaType;
@@ -13,9 +10,10 @@ import org.coders4africa.elimu.service.exception.NotFoundException;
 /**
  * This mapper will be use by jersey framework to translate the
  * elimu runtime {@link NotFoundException} exception 
- * into web clients comprehensible HTTP response error code
+ * into web clients comprehensible HTTP response error code.
  * 
- * @author MSOMDA
+ * @author Martial SOMDA
+ * @since 1.0
  */
 @Provider
 public class NotFoundExceptionMapper implements ExceptionMapper<NotFoundException> {

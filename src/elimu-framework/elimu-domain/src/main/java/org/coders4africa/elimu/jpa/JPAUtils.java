@@ -1,12 +1,11 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.coders4africa.elimu.jpa;
 
 /**
- *
- * @author MSOMDA
+ * This class contains convenient methods to ease the use of JPA through the whole application
+ * 
+ * @author Martial SOMDA
+ * @since 1.0
  */
 public class JPAUtils {
     

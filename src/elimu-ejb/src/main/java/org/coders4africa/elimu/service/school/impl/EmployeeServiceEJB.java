@@ -1,25 +1,24 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package org.coders4africa.elimu.service.school.impl;
 
 import java.util.List;
-import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.coders4africa.elimu.domain.school.Employee;
+import org.coders4africa.elimu.service.exception.NotFoundException;
 import org.coders4africa.elimu.service.jpa.JPABaseDAO;
 import org.coders4africa.elimu.service.school.EmployeeService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *
- * @author MSOMDA
+ * EJB 3.1 implementation of {@link EmployeeService}
+ * 
+ * @author Martial SOMDA
+ * @since 1.0
  */
 @Stateless
 @Local
@@ -60,6 +59,18 @@ public class EmployeeServiceEJB implements EmployeeService {
     public String countEmployees() {
         logger.info("Counting all existing employees");
         return String.valueOf(employeeDAO.count());
+    }
+
+    @Override
+    public void deleteEmployee(Long employeeId) throws NotFoundException {
+       logger.info("About to unregister the employee  {}",employeeId);
+        Employee employee = employeeDAO.findById(employeeId);
+        
+        if(employee == null){
+            throw new NotFoundException("Could not find a employee with the given id='"+ employeeId +"'");
+        }
+        
+        employeeDAO.delete(employee);
     }
 
 }
