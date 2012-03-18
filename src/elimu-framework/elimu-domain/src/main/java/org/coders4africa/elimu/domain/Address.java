@@ -27,7 +27,6 @@ package org.coders4africa.elimu.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -53,16 +52,6 @@ public class Address extends BaseEntity {
     private String celPhone;
     private String email;
 
-    @Override
-    @XmlAttribute
-    public Long getId() {
-        return super.getId();
-    }
-
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
-    }
 
     public String getEmail() {
         return email;
@@ -167,10 +156,9 @@ public class Address extends BaseEntity {
                 && (celPhone == null ? other.getCelPhone() == null : celPhone.equals(other.getCelPhone()))
                 && (email == null ? other.getEmail() == null : email.equals(other.getEmail()));
     }
-
+    
     @Override
     public String toString() {
         return "Adresse#"+ getId() +"[ street=" + street + ", country="+ country +", email="+ email +", celPhone="+ celPhone +" ]";
     }
-    
 }

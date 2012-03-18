@@ -32,7 +32,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Transient;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlID;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import org.coders4africa.elimu.jaxb.IDAdapter;
 import static org.coders4africa.elimu.jpa.JPAUtils.implementationClass;
 
 /**
@@ -47,7 +50,7 @@ import static org.coders4africa.elimu.jpa.JPAUtils.implementationClass;
  * @since 1.0
  */
 @MappedSuperclass
-public class BaseEntity implements Serializable {
+public abstract class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
     
@@ -64,35 +67,23 @@ public class BaseEntity implements Serializable {
      
     
     /**
-     * This Getter/Setter pair is made transient for JAX-B processor
-     * cause as they are public they are seen twice by JAX-B wich tries to
-     * bind the "id" field at this level but at the subclass level too.
-     * that leades to this error :
-     * <pre>
-     *  Class has two properties of the same name "id"
-     * </pre>
-     * To resolve it all subclasses must override these mothods :
-     * <pre>
-     * {@code 
-     *   &#64;Override
-     *   &#64;XmlAttribute
-     *   public Long getId() {
-     *       return super.getId();
-     *   }
-     *
-     *   &#64;Override
-     *   public void setId(Long id) {
-     *       super.setId(id);
-     *   }
-     * }
-     * </pre>
+     * This Getter/Setter
+     * The @XmlID is necessary to be referenced by
+     * @XmlIDREF Attribute
      */
-    @XmlTransient
+    @XmlID
+    @XmlAttribute
+    @XmlJavaTypeAdapter(IDAdapter.class)
     public Long getId() {
         return id;
     }
 
+    /**
+     * Set the value of unique identfier of the entity
+     *
+     * @param id new value of the unique identfier
+     */
     public void setId(Long id) {
         this.id = id;
-    }    
+    }
 }

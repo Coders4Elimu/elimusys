@@ -32,6 +32,7 @@ import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.coders4africa.elimu.domain.school.Employee;
+import org.coders4africa.elimu.domain.school.mapper.EmployeeMapper;
 import org.coders4africa.elimu.service.exception.NotFoundException;
 import org.coders4africa.elimu.service.jpa.JPABaseDAO;
 import org.coders4africa.elimu.service.school.EmployeeService;
@@ -64,7 +65,8 @@ public class EmployeeServiceEJB implements EmployeeService {
     @Override
     public void updateEmployeeInformation(Employee employee) {
         logger.info("About to update an employee");
-        employeeDAO.update(employee);
+        Employee attached = employeeDAO.findById(employee.getId());
+        employeeDAO.update(new EmployeeMapper().merge(employee, attached));
     }
 
     @Override

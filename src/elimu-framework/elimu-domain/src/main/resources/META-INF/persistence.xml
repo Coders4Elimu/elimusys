@@ -23,15 +23,21 @@
   <http://www.gnu.org/licenses/gpl-3.0.html>.
   #L%
   -->
-
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
   <persistence-unit name="elimusys-pu" transaction-type="JTA">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <jta-data-source>jdbc/elimu</jta-data-source>
+    <class>org.coders4africa.elimu.domain.Address</class>
+    <class>org.coders4africa.elimu.domain.Person</class>
+    <class>org.coders4africa.elimu.domain.school.School</class>
+    <class>org.coders4africa.elimu.domain.school.Employee</class>
+    <class>org.coders4africa.elimu.domain.school.Student</class>
+    <class>org.coders4africa.elimu.domain.school.Parent</class>
+    <class>org.coders4africa.elimu.domain.school.ClassRoom</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-        <!--property name="hibernate.hbm2ddl.auto" value="create-drop" /-->
-        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
+      <property name="hibernate.hbm2ddl.auto" value="create-drop"/>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5Dialect"/>
     </properties>
   </persistence-unit>
 </persistence>

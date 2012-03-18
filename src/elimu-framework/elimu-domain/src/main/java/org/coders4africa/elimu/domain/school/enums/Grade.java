@@ -32,5 +32,26 @@ package org.coders4africa.elimu.domain.school.enums;
  * @since 1.0
  */
 public enum Grade {
-
+    
+    FIRST("1st","FIRST"),
+    SECOND("2nd","SECOND"),
+    THIRD("3rd","THIRD"),
+    FOURTH("4th","FOURTH"),
+    FIFTH("5th","FIFTH");
+    
+    private String name;
+    private String description;
+    
+    private Grade(String name,String description){
+        this.name = name;
+        this.description = description;
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
+    public String getDescription(){
+        return description;
+    }
 }

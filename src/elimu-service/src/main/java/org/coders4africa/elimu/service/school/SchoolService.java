@@ -28,6 +28,7 @@ package org.coders4africa.elimu.service.school;
 import java.util.List;
 import org.coders4africa.elimu.domain.school.Employee;
 import org.coders4africa.elimu.domain.school.School;
+import org.coders4africa.elimu.domain.school.Student;
 import org.coders4africa.elimu.service.exception.EntityNotFoundException;
 import org.coders4africa.elimu.service.exception.NotFoundException;
 
@@ -39,6 +40,8 @@ import org.coders4africa.elimu.service.exception.NotFoundException;
  */
 public interface SchoolService {
 
+    //~ Methods related to schools themselve
+    
     /**
      * Return the number of schools registered into Elimu system
      * 
@@ -83,6 +86,11 @@ public interface SchoolService {
      */
     void unregisterSchool(Long id);
      
+    
+    
+    
+    //~ Methods related to schools employees
+    
     /**
      * Register a new Employee from a given school into Elimu system.
      * 
@@ -92,6 +100,16 @@ public interface SchoolService {
      * @throws NotFoundException Raised if the school doesn't exists into Elimu system. 
      */
     void registerEmployee(Employee employee, Long schoolId) throws NotFoundException;
+    
+    /**
+     * Unregisters a employee from a given school.<br/>
+     * That drops the employee instance from Elimu system.
+     * 
+     * @param employeeId The identifier of the employee to employee to unregister
+     * @throws NotFoundException Raised if the the employee doesn't exist or is not attached to the given school.
+     * @throws EntityNotFoundException Raised if the school referenced by the employee instance doesn't exists.
+     */
+    void unregisterEmployee(Long schoolId,Long employeeId) throws NotFoundException, EntityNotFoundException;
     
     /**
      * Retrives all employees of a given school.
@@ -109,13 +127,66 @@ public interface SchoolService {
      */
     String countEmployees(Long schoolId);
     
+    
+    
+    //~ Methods related to schools students
+    
     /**
-     * Unregisters a employee from a given school.<br/>
-     * That drops the employee instance from Elimu system.
+     * Register a new Student from a given school into Elimu system.
      * 
-     * @param employeeId The identifier of the employee to employee to unregister
-     * @throws NotFoundException Raised if the the employee doesn't exist or is not attached to the given school.
-     * @throws EntityNotFoundException Raised if the school referenced by the employee instance doesn't exists.
+     * FIXME The classroomId have to be calculated upon available
+     * classrooms for the stident grade, not to be passed as param
+     * 
+     * @param student The student to register
+     * @param schoolId The identifier of the shool for which the employee works.
+     * @param classroomId The identifier of the school's classroom in which the student has to be register.
+     * 
+     * @throws NotFoundException Raised if the school doesn't exists into Elimu system or the classroom is not attached to the given school. 
      */
-    void unregisterEmployee(Long schoolId,Long employeeId) throws NotFoundException, EntityNotFoundException;
+    void registerStudent(Student student, Long schoolId, Long classroomId) throws NotFoundException;
+    
+    /**
+     * Unregisters a student from a given school.<br/>
+     * That drops the student instance from Elimu system.
+     * 
+     * @param schoolId The identifier of the school of the student to unregister
+     * @param studentId The identifier of the student to employee to unregister
+     * @throws NotFoundException Raised if the the student doesn't exist or is not attached to the given school.
+     * @throws EntityNotFoundException Raised if the school referenced by the student instance doesn't exists.
+     */
+    void unregisterStudent(Long schoolId,Long studentId) throws NotFoundException, EntityNotFoundException;
+    
+    /**
+     * Retrives all students of a given school.
+     * 
+     * @param schoolId The identifier of the school for which students have to be search.
+     * @return All students of the given school.
+     */
+    List<Student> retrieveAllStudents(Long schoolId);
+    
+    /**
+     * Retrives all students of a given classroom and a given shool.
+     * 
+     * @param schoolId The identifier of the school for which student have to be search.
+     * @param classroomId The identifier of the classroom of the students
+     * @return All students of the given school ans classroom.
+     */
+    List<Student> retrieveAllStudents(Long schoolId, Long classroomId);
+    
+    /**
+     * Return the number of students of a given school.
+     * 
+     * @param schoolId The identifier of the school for which students have to be count.
+     * @return The number of students of the given school.
+     */
+    String countStudents(Long schoolId);
+    
+    /**
+     * Return the number of students of a given school and classroom.
+     * 
+     * @param schoolId The identifier of the school for which students have to be count.
+     * @param classroomId The identifier of the classroom of the students
+     * @return The number of students of the given school ans classroom.
+     */
+    String countStudents(Long schoolId, Long classroomId);
 }

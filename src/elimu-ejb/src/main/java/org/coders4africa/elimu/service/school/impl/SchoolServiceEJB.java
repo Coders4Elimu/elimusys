@@ -25,6 +25,7 @@
 
 package org.coders4africa.elimu.service.school.impl;
 
+import org.coders4africa.elimu.domain.school.Student;
 import org.coders4africa.elimu.service.jpa.JPABaseDAO;
 import java.util.List;
 import javax.ejb.Local;
@@ -32,8 +33,10 @@ import javax.ejb.Stateless;
 import javax.interceptor.Interceptors;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import org.coders4africa.elimu.domain.school.ClassRoom;
 import org.coders4africa.elimu.domain.school.Employee;
 import org.coders4africa.elimu.domain.school.School;
+import org.coders4africa.elimu.domain.school.mapper.SchoolMapper;
 import org.coders4africa.elimu.service.exception.EntityNotFoundException;
 import org.coders4africa.elimu.service.exception.NotFoundException;
 import org.coders4africa.elimu.service.school.SchoolService;
@@ -71,6 +74,20 @@ public class SchoolServiceEJB implements SchoolService {
         }
     };
     
+    private JPABaseDAO<Student> studentDAO = new JPABaseDAO<Student>() {
+        @Override
+        public EntityManager getEntityManager() {
+            return entityManager;
+        }
+    };
+    
+    private JPABaseDAO<ClassRoom> classroomDAO = new JPABaseDAO<ClassRoom>() {
+        @Override
+        public EntityManager getEntityManager() {
+            return entityManager;
+        }
+    };
+    
     @Override
     public void registerSchool(School school){
         logger.info("About to create a new school");
@@ -80,7 +97,8 @@ public class SchoolServiceEJB implements SchoolService {
     @Override
     public void updateSchoolInformation(School school) {
         logger.info("About to update a school");
-        schoolDAO.update(school);
+        School attached = schoolDAO.findById(school.getId());
+        schoolDAO.update(new SchoolMapper().merge(school, attached));
     }
 
     @Override
@@ -132,7 +150,7 @@ public class SchoolServiceEJB implements SchoolService {
         }
         
         if(!employee.getSchool().getId().equals(schoolId)){
-            throw new NotFoundException("Currently knowned employee with the given id='"+ employeeId +"' "
+            throw new NotFoundException("Currently known employee with the given id='"+ employeeId +"' "
                     + "is not attached to the given school id='"+ schoolId +"' "
                     + "but with school id='"+ employee.getSchool().getId() +"'");
         }
@@ -145,12 +163,76 @@ public class SchoolServiceEJB implements SchoolService {
     @Override
     public List<Employee> retrieveAllEmployees(Long schoolId) {
         logger.info("Retrieving all employees of school {}",schoolId);
-        return employeeDAO.find(Employee.QUERY_SHOOL_EMPLOYEES, schoolId);
+        return employeeDAO.find(Employee.QUERY_SCHOOL_EMPLOYEES, schoolId);
     }
     
     @Override
     public String countEmployees(Long schoolId) {
         logger.info("Counting all employees of school {}",schoolId);
-        return String.valueOf(employeeDAO.count(Employee.QUERY_COUNT_SHOOL_EMPLOYEES, schoolId));
+        return String.valueOf(employeeDAO.count(Employee.QUERY_COUNT_SCHOOL_EMPLOYEES, schoolId));
+    }
+
+    @Override
+    public void registerStudent(Student student, Long schoolId, Long classroomId) throws NotFoundException {
+        logger.info("About to register a new student for school {}",schoolId);
+        School school = schoolDAO.findById(schoolId);
+        
+        if(school == null){
+            throw new NotFoundException("Could not find a shool with the given id='"+ schoolId +"'");
+        }
+        
+        ClassRoom classroom = classroomDAO.findById(classroomId);
+        
+        if(classroom == null){
+            throw new NotFoundException("Could not find a classroom with the given id='"+ classroomId +"'");
+        }
+        
+        //check if the classroom is attached to the given shool
+        school.addStudent(student);
+        schoolDAO.save(school);  
+    }
+
+    @Override
+    public void unregisterStudent(Long schoolId, Long studentId) throws NotFoundException, EntityNotFoundException {
+        logger.info("About to unregister the student  {} from the school {}",studentId, schoolId);
+        Student student = studentDAO.findById(studentId);
+        
+        if(student == null){
+            throw new NotFoundException("Could not find a student with the given id='"+ studentId +"'");
+        }
+        
+        if(!student.getSchool().getId().equals(schoolId)){
+            throw new NotFoundException("Currently known student with the given id='"+ studentId +"' "
+                    + "is not attached to the given school id='"+ schoolId +"' "
+                    + "but with school id='"+ student.getSchool().getId() +"'");
+        }
+        School school = schoolDAO.checkExists(student.getSchool());
+        
+        school.removeStudent(student);
+        schoolDAO.update(school);
+    }
+
+    @Override
+    public List<Student> retrieveAllStudents(Long schoolId) {
+        logger.info("Retrieving all students of school {}",schoolId);
+        return studentDAO.find(Student.QUERY_SCHOOL_STUDENTS, schoolId);
+    }
+
+    @Override
+    public List<Student> retrieveAllStudents(Long schoolId, Long classroomId) {
+        logger.info("Retrieving all students of school {} and classroom {}",schoolId,classroomId);
+        return studentDAO.find(Student.QUERY_CLASSROOM_STUDENTS, schoolId, classroomId);
+    }
+    
+    @Override
+    public String countStudents(Long schoolId) {
+        logger.info("Counting all students of school {}",schoolId);
+        return String.valueOf(studentDAO.count(Student.QUERY_COUNT_SCHOOL_STUDENTS, schoolId));
+    }
+
+    @Override
+    public String countStudents(Long schoolId, Long classroomId) {
+        logger.info("Counting all students of school {} and classroom {}",schoolId,classroomId);
+        return String.valueOf(studentDAO.count(Student.QUERY_COUNT_CLASSROOM_STUDENTS, schoolId,classroomId));
     }
 }

@@ -8,14 +8,10 @@
     <description>Elimu Services EJB Implementation</description>
     
     <parent>
-        <artifactId>elimusys</artifactId>
         <groupId>org.coders4africa</groupId>
+        <artifactId>elimusys</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
-    
-    <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
     
     <build>
         <plugins>
@@ -41,29 +37,29 @@
     
     <dependencies>
         <dependency>
-            <groupId>org.coders4africa</groupId>
+            <groupId>${project.groupId}</groupId>
             <artifactId>elimu-service</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax</groupId>
+            <artifactId>javaee-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.6.4</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>jcl-over-slf4j</artifactId>
-            <version>1.6.4</version>
         </dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.6.4</version>
         </dependency>
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>
-            <version>1.2.16</version>
         </dependency>
     </dependencies>
 </project>

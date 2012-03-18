@@ -34,7 +34,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import org.coders4africa.elimu.domain.Address;
@@ -49,6 +50,7 @@ import org.coders4africa.elimu.domain.BaseEntity;
 @Entity
 @Table(name="schools")
 @XmlRootElement
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class School extends BaseEntity {
     
     private static final long serialVersionUID = 1L;
@@ -56,38 +58,57 @@ public class School extends BaseEntity {
     private String name;
     private String fax;
     private String website;
-    @OneToOne(targetEntity=Address.class, cascade={
-        CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, 
-        CascadeType.REMOVE},fetch= FetchType.EAGER)
+    @OneToOne(cascade=CascadeType.ALL,fetch= FetchType.EAGER)
     @JoinColumn(name="addressID",referencedColumnName="id",unique=true,nullable=false)
     private Address address;
-    @OneToMany(targetEntity=Employee.class,cascade={
-        CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH, 
-        CascadeType.REMOVE},fetch= FetchType.LAZY,mappedBy="school")
+    @OneToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE} ,
+            fetch= FetchType.LAZY,mappedBy="school")
     private Set<Employee> employees = new HashSet<Employee>();
+    @OneToMany(cascade={CascadeType.PERSIST, CascadeType.REMOVE},
+            fetch= FetchType.LAZY,mappedBy="school")
+    private Set<Student> students = new HashSet<Student>();
 
-    @Override
-    @XmlAttribute
-    public Long getId() {
-        return super.getId();
+
+    @XmlTransient
+    public Set<Student> getStudents() {
+        return students;
     }
 
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
+    public void setStudents(Set<Student> students) {
+        this.students = students;
+    }
+    
+    
+    /**
+     * Convenient method to add a new student to the list
+     * of students.
+     * 
+     * @param student The student to add
+     */
+    public synchronized void addStudent(Student student){
+        students.add(student);
+        student.setSchool(this);
     }
     
     /**
-     * @return the employees
+     * Convenient method to remove a student to the list
+     * of students
+     * 
+     * @param student The student to remove
      */
+    public synchronized void removeStudent(Student student){
+        if(students.contains(student)){
+            students.remove(student);
+            student.setSchool(null);
+        }
+    }
+    
     @XmlTransient
     public Set<Employee> getEmployees() {
         return employees;
     }
 
-    /**
-     * @param employees the employees to set
-     */
+
     public void setEmployees(Set<Employee> employees) {
         this.employees = employees;
     }
@@ -96,7 +117,7 @@ public class School extends BaseEntity {
      * Convenient method to add a new employee to the list
      * of employees
      * 
-     * @param employee 
+     * @param employee  The employee to add
      */
     public synchronized void addEmployee(Employee employee){
         employees.add(employee);
@@ -104,10 +125,10 @@ public class School extends BaseEntity {
     }
     
     /**
-     * Convenient method to add a new employee to the list
+     * Convenient method to remove an employee to the list
      * of employees
      * 
-     * @param employee 
+     * @param employee The employee to remove
      */
     public synchronized void removeEmployee(Employee employee){
         if(employees.contains(employee)){
@@ -155,6 +176,8 @@ public class School extends BaseEntity {
         hash += (fax == null ? 1 : fax.hashCode()) * hash;
         hash += (website == null ? 1 : website.hashCode()) * hash;
         hash += (address == null ? 1 : address.hashCode()) * hash;
+        hash += (employees == null ? 1 : employees.hashCode()) * hash;
+        hash += (students == null ? 1 : students.hashCode()) * hash;
         return hash;
     }
 
@@ -167,11 +190,14 @@ public class School extends BaseEntity {
         return (name == null ? other.getName() == null : name.equals(other.getName()))
                 && (fax == null ? other.getFax() == null : fax.equals(other.getFax()))
                 && (website == null ? other.getWebsite() == null : website.equals(other.getWebsite()))
-                && (address == null ? other.getAddress() == null : address.equals(other.getAddress()));
+                && (address == null ? other.getAddress() == null : address.equals(other.getAddress()))
+                && (employees == null ? other.getEmployees() == null : employees.equals(other.getEmployees()))
+                && (students == null ? other.getStudents() == null : students.equals(other.getStudents()));
     }
-
+    
     @Override
     public String toString() {
-        return "School#"+ getId() +"[ name=" + name + ", website="+ website +", fax="+ fax + ", address="+ address + " ]";
+        return "School#"+ getId() +"[ name=" + name + ", website="+ website +", fax="+ fax + ", address="+ address + 
+                ", employees="+ employees +", students="+ students +" ]";
     }
 }

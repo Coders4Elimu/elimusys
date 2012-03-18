@@ -56,7 +56,7 @@ import org.coders4africa.elimu.domain.school.enums.PersonType;
 @Table(name="persons")
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(discriminatorType= DiscriminatorType.STRING,name="type")
-public abstract class Person extends BaseEntity {
+public class Person extends BaseEntity {
     
     private static final long serialVersionUID = 1L;
 
@@ -76,7 +76,24 @@ public abstract class Person extends BaseEntity {
     protected Address address;
     @Enumerated(EnumType.STRING)
     private String type;
+
+    public Person() {
+    }
+
+    public Person(Title title, String firstName, String middleName, 
+            String lastName, Gender gender, Date birthDayDate, 
+            Address address, String type) {
+        this.title = title;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birthDayDate = birthDayDate;
+        this.address = address;
+        this.type = type;
+    }
    
+    
     public Date getBirthDayDate() {
         return birthDayDate;
     }

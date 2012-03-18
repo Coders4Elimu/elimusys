@@ -16,3 +16,25 @@
 	<fax>617.495.8821</fax> 
 	<website>www.harvard.edu</website> 
 </school>
+
+<student> 
+	<address> 
+		<celPhone>00000000</celPhone> 
+		<city>New York</city> 
+		<country>USA</country> 
+		<details/> 
+		<email>martial.somda@gmail.com</email> 
+		<landPhone>0176352242</landPhone> 
+		<state>Ile de France</state> 
+		<street>01 rue de la chance</street> 
+		<zipCode>92560</zipCode> 
+	</address> 
+	<birthDayDate>2012-02-26T00:00:00+01:00</birthDayDate> 
+	<firstName>Martial</firstName> 
+	<gender>Male</gender> 
+	<lastName>SOMDA</lastName> 
+	<middleName/> 
+	<title>Mr</title> 
+	<type>STUDENT</type> 
+	<grade>FIRST</grade> 
+</student>

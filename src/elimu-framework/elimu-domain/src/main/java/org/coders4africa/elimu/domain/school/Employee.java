@@ -36,9 +36,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import org.coders4africa.elimu.domain.Person;
 import org.coders4africa.elimu.domain.school.enums.Function;
 import org.coders4africa.elimu.domain.school.enums.PersonType;
@@ -53,34 +52,38 @@ import org.coders4africa.elimu.domain.school.enums.PersonType;
 @Table(name = "schoolemployees")
 @DiscriminatorValue(value = PersonType.EMPLOYEE)
 @NamedQueries({
-    @NamedQuery(name = Employee.QUERY_COUNT_SHOOL_EMPLOYEES,
+    @NamedQuery(name = Employee.QUERY_COUNT_SCHOOL_EMPLOYEES,
     query = "select count(*) from Employee e where e.school.id = ?1"),
-    @NamedQuery(name = Employee.QUERY_SHOOL_EMPLOYEES,
+    @NamedQuery(name = Employee.QUERY_SCHOOL_EMPLOYEES,
     query = "from Employee e where e.school.id = ?1")
 })
 @XmlRootElement
 public class Employee extends Person {
 
     private static final long serialVersionUID = 1L;
-    public static final String QUERY_COUNT_SHOOL_EMPLOYEES = "queryCountSchoolEmployees";
-    public static final String QUERY_SHOOL_EMPLOYEES = "querySchoolEmployees";
+    public static final String QUERY_COUNT_SCHOOL_EMPLOYEES = "queryCountSchoolEmployees";
+    public static final String QUERY_SCHOOL_EMPLOYEES = "querySchoolEmployees";
     
     @Enumerated(EnumType.STRING)
     private Function function;
-    @ManyToOne(targetEntity = School.class, cascade = {
-        CascadeType.PERSIST}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "schoolID", nullable = false)
     private School school;
 
-    @Override
-    @XmlAttribute
-    public Long getId() {
-        return super.getId();
+    public Employee() {
     }
 
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
+    public Employee(Person person) {
+        super(person.getTitle(), person.getFirstName(), person.getMiddleName(), 
+                person.getLastName(), person.getGender(), person.getBirthDayDate(), 
+                person.getAddress(), person.getType());
+    }
+
+    
+    public Employee(Person person, Function function, School school) {
+        this(person);
+        this.function = function;
+        this.school = school;
     }
 
     /**
@@ -88,7 +91,7 @@ public class Employee extends Person {
      *
      * @return the value of school
      */
-    @XmlTransient
+    @XmlIDREF
     public School getSchool() {
         return school;
     }
@@ -141,9 +144,9 @@ public class Employee extends Person {
         return (function == null ? other.getFunction() == null : function.equals(other.getFunction()))
                 && (school == null ? other.getFirstName() == null : school.equals(other.getSchool()));
     }
-
+    
     @Override
     public String toString() {
-        return "Employee#" + getId() + "[ function=" + function + ", person=" + super.toString() + ", school=" + school.toString() + " ]";
+        return "Employee#" + getId() + "[ function=" + function + ", person=" + super.toString() + ", school=" + school + " ]";
     }
 }

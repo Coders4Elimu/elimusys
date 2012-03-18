@@ -30,7 +30,7 @@ import org.coders4africa.elimu.domain.school.Employee;
 import org.coders4africa.elimu.service.exception.NotFoundException;
 
 /**
- *Elimu system's Employees management contract
+ * Elimu system's Employees management contract
  * 
  * @author Martial SOMDA
  * @since 1.0

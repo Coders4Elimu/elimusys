@@ -43,6 +43,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import org.coders4africa.elimu.domain.school.Employee;
 import org.coders4africa.elimu.domain.school.School;
+import org.coders4africa.elimu.domain.school.Student;
 import org.coders4africa.elimu.service.exception.EntityNotFoundException;
 import org.coders4africa.elimu.service.exception.NotFoundException;
 import org.coders4africa.elimu.service.school.SchoolService;
@@ -118,7 +119,7 @@ public class SchoolResource {
     @GET
     @Path("count")
     @Produces(MediaType.TEXT_PLAIN)
-    public String count() {
+    public String countSchools() {
         return service.countSchools();
     }
     
@@ -159,7 +160,65 @@ public class SchoolResource {
     @GET
     @Path("{id}/employees/count")
     @Produces(MediaType.TEXT_PLAIN)
-    public String count(@PathParam("id") Long schoolId) {
+    public String countEmployees(@PathParam("id") Long schoolId) {
         return service.countEmployees(schoolId);
+    }
+    
+    @GET
+    @Path("{id}/students")
+    @Produces({
+        MediaType.APPLICATION_XML,
+        MediaType.APPLICATION_JSON
+    })
+    public List<Student> retrieveAllStudents(@PathParam("id") Long schoolId) {
+        return service.retrieveAllStudents(schoolId);
+    }
+    
+    @GET
+    @Path("{id}/{classroomId}/students")
+    @Consumes({
+        MediaType.APPLICATION_XML,
+        MediaType.APPLICATION_JSON
+    })
+    public List<Student> retrieveAllStudents(@PathParam("id") Long schoolId, @PathParam("classroomId") Long classroomId) {
+        return service.retrieveAllStudents(schoolId,classroomId);
+    }
+    
+    @GET
+    @Path("{id}/{classroomId}/students/count")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String countStudents(@PathParam("id") Long schoolId, @PathParam("classroomId") Long classroomId) {
+        return service.countStudents(schoolId,classroomId);
+    }
+    
+    @POST
+    @Path("{id}/{classroomId}/students")
+    @Consumes({
+        MediaType.APPLICATION_XML,
+        MediaType.APPLICATION_JSON
+    })
+    public Response registerStudent(Student student, @PathParam("id") Long schoolId, @PathParam("classroomId") Long classroomId) throws NotFoundException{
+        service.registerStudent(student,schoolId,classroomId);
+        
+        if(null != student.getId()){
+            URI createdUri = uriInfo.getAbsolutePath();
+            return Response.created(createdUri).build();
+        }
+        
+        return Response.noContent().build();
+    }
+    
+    @DELETE
+    @Path("{id}/students/{studentId}")
+    public Response unregisterStudent(@PathParam("id") Long id, @PathParam("studentId") Long studentId) throws NotFoundException, EntityNotFoundException {
+        service.unregisterStudent(id,studentId);
+        return Response.ok().build();
+    }
+
+    @GET
+    @Path("{id}/students/count")
+    @Produces(MediaType.TEXT_PLAIN)
+    public String countStudents(@PathParam("id") Long schoolId) {
+        return service.countStudents(schoolId);
     }
 }
