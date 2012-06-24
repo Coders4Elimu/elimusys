@@ -188,9 +188,8 @@
     <modules>
         <module>elimu-framework/elimu-test</module>
         <module>elimu-framework/elimu-domain</module>
-        <module>elimu-service</module>
-        <module>elimu-webservice</module>
         <module>elimu-ejb</module>
+        <module>elimu-rs</module>    
         <module>elimu-ear</module>
     </modules>
  

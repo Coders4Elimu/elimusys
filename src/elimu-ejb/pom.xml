@@ -20,7 +20,8 @@
                 <artifactId>maven-ejb-plugin</artifactId>
                 <version>2.3</version>
                 <configuration>
-                    <ejbVersion>3.1</ejbVersion>    
+                    <ejbVersion>3.1</ejbVersion> 
+                    <generateClient>true</generateClient>
                     <archive>
                         <index/>
                         <manifest>
@@ -38,7 +39,7 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>elimu-service</artifactId>
+            <artifactId>elimu-domain</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>

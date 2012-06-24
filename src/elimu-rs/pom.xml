@@ -2,9 +2,9 @@
 <project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>elimu-webservice</artifactId>
+    <artifactId>elimu-rs</artifactId>
     <packaging>war</packaging>
-    <name>elimu-webservice</name>
+    <name>elimu-rs</name>
     <description>Elimu RestFull WebServices</description>
     
     <parent>
@@ -42,8 +42,9 @@
     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>elimu-service</artifactId>
+            <artifactId>elimu-ejb</artifactId>
             <version>${project.version}</version>
+            <classifier>client</classifier>
         </dependency>
         <dependency>
             <groupId>com.sun.jersey</groupId>
