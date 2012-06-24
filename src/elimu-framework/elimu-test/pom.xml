@@ -8,15 +8,14 @@
     <name>elimu-test</name>
     
     <parent>
-        <artifactId>elimusys</artifactId>
         <groupId>org.coders4africa</groupId>
+        <artifactId>elimusys</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     
     <properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring.version>3.0.6.RELEASE</spring.version>
         <junit.version>4.10</junit.version>
+        <spring.version>3.0.6.RELEASE</spring.version>
         <dbunit.version>2.2</dbunit.version>
         <commons-dbcp.version>1.2.2</commons-dbcp.version>
     </properties>
@@ -80,7 +79,6 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
-            <version>1.5.8</version>
         </dependency>
     </dependencies>
 </project>
