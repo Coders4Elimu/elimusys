@@ -1,7 +1,28 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * #%L
+ * elimu-domain
+ * 
+ * $Id$
+ * $HeadURL$
+ * %%
+ * Copyright (C) 2012 Coders4Africa
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/gpl-3.0.html>.
+ * #L%
  */
+
 package org.coders4africa.elimu.domain;
 
 import java.text.SimpleDateFormat;
@@ -22,17 +43,20 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.coders4africa.elimu.domain.enums.Gender;
 import org.coders4africa.elimu.domain.enums.Title;
+import org.coders4africa.elimu.domain.school.Employee;
 import org.coders4africa.elimu.domain.school.enums.PersonType;
 
 /**
- *
- * @author MSOMDA
+ * Person Entity.<br/>Base class for Elimu human actors
+ * @author Martial SOMDA
+ * @see Employee
+ * @since 1.0
  */
 @Entity
 @Table(name="persons")
 @Inheritance(strategy=InheritanceType.JOINED)
 @DiscriminatorColumn(discriminatorType= DiscriminatorType.STRING,name="type")
-public abstract class Person extends BaseEntity {
+public class Person extends BaseEntity {
     
     private static final long serialVersionUID = 1L;
 
@@ -52,7 +76,24 @@ public abstract class Person extends BaseEntity {
     protected Address address;
     @Enumerated(EnumType.STRING)
     private String type;
+
+    public Person() {
+    }
+
+    public Person(Title title, String firstName, String middleName, 
+            String lastName, Gender gender, Date birthDayDate, 
+            Address address, String type) {
+        this.title = title;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.birthDayDate = birthDayDate;
+        this.address = address;
+        this.type = type;
+    }
    
+    
     public Date getBirthDayDate() {
         return birthDayDate;
     }
@@ -109,7 +150,7 @@ public abstract class Person extends BaseEntity {
         this.firstName = firstName;
     }
 
-        /**
+     /**
      * Get the value of type
      *
      * @return the value of type

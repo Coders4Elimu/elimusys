@@ -1,7 +1,28 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * #%L
+ * elimu-domain
+ * 
+ * $Id$
+ * $HeadURL$
+ * %%
+ * Copyright (C) 2012 Coders4Africa
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as
+ * published by the Free Software Foundation, either version 3 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/gpl-3.0.html>.
+ * #L%
  */
+
 package org.coders4africa.elimu.domain.school;
 
 import javax.persistence.CascadeType;
@@ -14,51 +35,55 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlIDREF;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 import org.coders4africa.elimu.domain.Person;
 import org.coders4africa.elimu.domain.school.enums.Function;
 import org.coders4africa.elimu.domain.school.enums.PersonType;
 
 /**
- *
- * @author MSOMDA
+ * School's Employee entity.
+ * 
+ * @author Martial SOMDA
+ * @since 1.0
  */
 @Entity
 @Table(name = "schoolemployees")
 @DiscriminatorValue(value = PersonType.EMPLOYEE)
 @NamedQueries({
-    @NamedQuery(name = Employee.QUERY_COUNT_SHOOL_EMPLOYEES,
+    @NamedQuery(name = Employee.QUERY_COUNT_SCHOOL_EMPLOYEES,
     query = "select count(*) from Employee e where e.school.id = ?1"),
-    @NamedQuery(name = Employee.QUERY_SHOOL_EMPLOYEES,
+    @NamedQuery(name = Employee.QUERY_SCHOOL_EMPLOYEES,
     query = "from Employee e where e.school.id = ?1")
 })
 @XmlRootElement
 public class Employee extends Person {
 
     private static final long serialVersionUID = 1L;
-    public static final String QUERY_COUNT_SHOOL_EMPLOYEES = "queryCountSchoolEmployees";
-    public static final String QUERY_SHOOL_EMPLOYEES = "querySchoolEmployees";
+    public static final String QUERY_COUNT_SCHOOL_EMPLOYEES = "queryCountSchoolEmployees";
+    public static final String QUERY_SCHOOL_EMPLOYEES = "querySchoolEmployees";
+    
     @Enumerated(EnumType.STRING)
     private Function function;
-    @ManyToOne(targetEntity = School.class, cascade = {
-        CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH,
-        CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    @ManyToOne(cascade=CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "schoolID", nullable = false)
     private School school;
 
-    @Override
-    @XmlAttribute
-    public Long getId() {
-        return super.getId();
+    public Employee() {
     }
 
-    @Override
-    public void setId(Long id) {
-        super.setId(id);
+    public Employee(Person person) {
+        super(person.getTitle(), person.getFirstName(), person.getMiddleName(), 
+                person.getLastName(), person.getGender(), person.getBirthDayDate(), 
+                person.getAddress(), person.getType());
+    }
+
+    
+    public Employee(Person person, Function function, School school) {
+        this(person);
+        this.function = function;
+        this.school = school;
     }
 
     /**
@@ -66,7 +91,7 @@ public class Employee extends Person {
      *
      * @return the value of school
      */
-    @XmlTransient
+    @XmlIDREF
     public School getSchool() {
         return school;
     }
@@ -119,9 +144,9 @@ public class Employee extends Person {
         return (function == null ? other.getFunction() == null : function.equals(other.getFunction()))
                 && (school == null ? other.getFirstName() == null : school.equals(other.getSchool()));
     }
-
+    
     @Override
     public String toString() {
-        return "Employee#" + getId() + "[ function=" + function + ", person=" + super.toString() + ", school=" + school.toString() + " ]";
+        return "Employee#" + getId() + "[ function=" + function + ", person=" + super.toString() + ", school=" + school + " ]";
     }
 }
